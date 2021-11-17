@@ -17,8 +17,10 @@ import thunk from "redux-thunk";
 import MainRoot from "./Components/MainRoot";
 import MainParts from "./Components/HomePage/MainParts";
 
+// , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 
-const store =createStore(rootReducer);
+const store =createStore(rootReducer, compose(applyMiddleware(thunk), window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__() ));
+
 
 
 

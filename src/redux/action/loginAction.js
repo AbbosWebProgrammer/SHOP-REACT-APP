@@ -31,7 +31,6 @@ export function login(event, errors, values, history) {
 export const getProducts = () => (dispatch) => {
     axios.get(API_PATH + "api/ProductsColorByProductId/")
         .then((res) => {
-            console.log(res);
             dispatch(updateState({subProduct: res.data}))
         })
 }

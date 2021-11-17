@@ -13,35 +13,14 @@ import Cards from "./Cards";
 class Wildberries extends Component {
 
 
-    constructor(props){
-        super(props);
-        this.state={
-            isRegistred:true
-        }
-
-    }
-
-
-
-
-
-
     render() {
 
-
-
-        const onClick=() => {
-            this.setState({ isRegistred: !this.state.isRegistred})
-        };
 
         return (
             <div>
 
                 <Nav/>
-                {
-                    this.state.isRegistred? <Main myItem = {onClick}/>
-                        :<Back myItem={onClick}/>
-                }
+                <Main/>
 
              <Footer/>
 
@@ -51,3 +30,5 @@ class Wildberries extends Component {
 }
 
 export default Wildberries;
+
+

@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import Navbar from "../Nav";
 import Footer from "../Footer";
 import CarouselMain from "./Carousel-main";
@@ -8,15 +8,24 @@ import ModalExample from "../Data";
 import CardsMain from "./CardsMain";
 import MainParts from "./MainParts";
 import Brends from "./Brends";
+import {connect} from "react-redux";
+import {inform,getPartsB, getPartsId} from "../../redux/action/mainPartsAction";
 
 
 import Wildberries from "../Wildberries";
 import {Link} from "react-router-dom";
+import axios from "axios";
+import {API_PATH} from "../../tools/constans";
 
 
 
-class Home extends Component {
-    render() {
+const Home = (props) => {
+
+    useEffect(() => {
+        props.getPartsB();
+    },[])
+
+
         return (
 
 
@@ -25,39 +34,29 @@ class Home extends Component {
                 <div className="main-part p-5 pt-0">
               <CarouselMain/>
 
-                <MainParts/>
+                <MainParts history={props.history}/>
 
                 <div>
                     <h1>Хиты продаж</h1>
                     <CardsMain/>
 
                     <div className="row">
-                        <Link to={"/two"} className="col-6">
-                            <div className="half">
-                                <img src="https://images.wbstatic.net/bners1/03034858697.jpg" alt=""/>
-                            </div>
-                        </Link>
-                        <Link to={"/two"} className="col-6">
-                            <div className="half">
-                                <img src="https://images.wbstatic.net/bners1/pepe_1410.jpg" alt=""/>
-                            </div>
-                        </Link>
+
+                        {
+                            props.partsB.map((datas,index) => (
+                                <div className="parts  col-6  mt-4" key={index}>
+                                <div className="half" >
+                                    <img onClick = {() => props.getPartsId(datas.brand, props.history)} src={datas.image} alt=""/>
+
+                                </div>
+                                </div>
+                            ))
+                        }
+
+
                     </div>
 
                     <CardsMain/>
-
-                    <div className="row">
-                        <Link to={"/two"} className="col-6">
-                            <div className="half">
-                                <img src="https://images.wbstatic.net/bners1/87435798865444.jpg" alt=""/>
-                            </div>
-                        </Link>
-                        <Link to={"/two"} className="col-6">
-                            <div className="half">
-                                <img src="https://images.wbstatic.net/bners1/main_poloska_kids_shoes.jpg" alt=""/>
-                            </div>
-                        </Link>
-                    </div>
 
                     <CardsMain/>
 
@@ -72,6 +71,13 @@ class Home extends Component {
             </div>
         );
     }
-}
 
-export default Home;
+const mapStateToProps = (state) => {
+
+    return{
+        partsB:state.partM.partsB,
+    }
+};
+
+
+export default connect(mapStateToProps,{inform,getPartsB, getPartsId})(Home);

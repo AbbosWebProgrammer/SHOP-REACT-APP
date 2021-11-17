@@ -1,12 +1,19 @@
 import React, {Component} from 'react';
-
+import {App} from "./FooterResponse";
 
 class Footer extends Component {
+
+    constructor(props) {
+        super(props);
+        this.state = {
+            open: false
+        }
+    }
 
     render() {
         return (
             <div className="footer">
-
+                <div className="media">
                 <div className="footer-link">
                     <div className="link-one">
                         <ul>
@@ -38,6 +45,7 @@ class Footer extends Component {
                                 <a href="#">Вопросы и ответы</a>
                             </li>
                         </ul>
+
                     </div>
                     <div className="link-two">
                         <ul>
@@ -137,6 +145,7 @@ class Footer extends Component {
                         </ul>
                     </div>
                 </div>
+
                 <div className="footer-footer">
                     <div className="footer-footer-commit">
                         2004-2021 © Wildberries — модный интернет-магазин одежды, обуви и аксессуаров.
@@ -156,6 +165,10 @@ class Footer extends Component {
                 </div>
 
                 <div className="oval2"></div>
+
+                </div>
+
+                <App/>
 
             </div>
         );

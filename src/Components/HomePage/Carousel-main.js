@@ -1,5 +1,5 @@
 
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {Link} from "react-router-dom";
 
 import "slick-carousel/slick/slick.css";
@@ -8,19 +8,24 @@ import "slick-carousel/slick/slick-theme.css";
 import Slider from "react-slick";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
+import {connect} from "react-redux";
+import {inform,getCarousel,getCarouselId} from "../../redux/action/mainPartsAction";
 
 const CarouselMain = (props) => {
 
-    const [data, setData] = useState([])
+    useEffect(() => {
+        props.getCarousel();
+    },[])
 
-    axios.get(API_PATH + "api/Main_page_banner/")
-        .then(res => setData(res.data))
+    // const [data, setData] = useState([])
+    //
+    // axios.get(API_PATH + "api/ShoppingDayForHomePageCarousel/")
+    //     .then(res => setData(res.data))
 
-    const renderSlides = data.map( (data) => (
-        <Link to={"/two"}>
-            <img src={data.image} alt=""/>
-
-        </Link>
+   const renderSlides = props.slide.map( (data, index) => (
+        <div key={index}>
+            <img src={data.image} onClick={() => props.getCarouselId(data.id, props.history)} alt=""/>
+        </div>
     ))
 
     return (
@@ -41,6 +46,13 @@ const CarouselMain = (props) => {
     );
 
 }
-export default CarouselMain;
+
+const mapStateToProps = (state) => {
+    return{
+        slide:state.partM.slide,
+    }
+}
+
+export default connect(mapStateToProps,{inform,getCarousel,getCarouselId})(CarouselMain);
 
 

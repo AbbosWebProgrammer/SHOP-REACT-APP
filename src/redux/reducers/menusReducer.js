@@ -6,7 +6,7 @@ const initialState = {
     submenu:false,
     subModals:[],
     subProduct:[]
-}
+};
 
 
 export const menusReducer = (state = initialState, action) => {

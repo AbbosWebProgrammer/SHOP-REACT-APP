@@ -1,16 +1,21 @@
-import React, {Component,useState} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import {UncontrolledCollapse, CardBody, Card, Form, FormGroup, Label, Input,} from 'reactstrap';
 import axios from "axios";
 import ModalExample from "./Data";
 import Back from "./Back";
 import Footer from "./Footer";
 import Cards from "./Cards";
+import {API_PATH} from "../tools/constans";
+import {getPartsId} from "../redux/action/mainPartsAction";
+import {connect} from "react-redux";
 
 
+const Main = (props) => {
 
-class Main extends Component{
+    useEffect(() => {
+        props.getPartsId();
+    },[])
 
-    render() {
 
         return (
 
@@ -240,9 +245,14 @@ class Main extends Component{
 
         );
     }
+
+const mapStateToProps = (state) => {
+    return{
+        partsId: state.partM.partsId,
+    }
 }
 
-export default Main;
+export default connect(mapStateToProps,{getPartsId}) (Main);
 
 
 

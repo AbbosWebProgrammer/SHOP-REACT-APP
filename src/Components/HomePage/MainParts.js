@@ -1,37 +1,52 @@
-import React, {useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
+import {connect} from "react-redux";
+import {inform,getParts, getPartsId} from "../../redux/action/mainPartsAction";
+
 
 const MainParts = (props) => {
 
-    const [data, setData ] = useState([])
+    useEffect(() => {
+        props.getParts();
+    },[])
 
-axios.get(API_PATH + "api/Main_page_promo/")
-    // .then(res => console.log(res))
+    const news = props.parts.map((datas,index) => (
 
-    .then(res => setData (res.data))
-    .catch(err => console.log("Aka aylaning"))
+            <div className="parts  col-sm-3  mt-4" key={index}>
+                <div className="box-img" >
+                    <img onClick = {() => props.getPartsId(datas.brand, props.history)} src={datas.image} alt=""/>
+
+                </div>
+            </div>
+
+    ))
 
         return (
             <div>
                 <div className="select mt-5 mb-5">
-                    <div className="row">
-                        {
-                            data.map((data) => (
 
-                                <Link to={"/two"} className="parts  col-sm-3 mt-4">
-                                    <div className="box-img">
-                                        <img key={data.id} src={data.image} alt=""/>
-                                    </div>
-                                </Link>
-                            ))
-                        }
+
+                    <div className="row">
+                        {news}
+
+
+
                     </div>
+
                 </div>
             </div>
         );
 }
 
-export default MainParts
+const mapStateToProps = (state) => {
+
+    return{
+        parts:state.partM.parts,
+    }
+};
+
+
+export default connect(mapStateToProps,{inform,getParts, getPartsId})(MainParts);
 

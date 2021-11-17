@@ -12,6 +12,9 @@ import {BrowserRouter,Switch,Route} from "react-router-dom"
 import Wildberrries from "./Wildberries"
 import Back from "./Back";
 import Korzina from "./HomePage/Korzina";
+import Cards from "./Cards";
+import Main2 from "./Main2";
+import Cards2 from "./Cards2";
 
 class MainRoot extends Component {
 
@@ -23,8 +26,10 @@ class MainRoot extends Component {
                     <Switch>
                         <Route path="/" exact component={Home} />
                         <Route path="/two" exact component={Wildberries} />
+                        <Route path="/twooo" exact component={Main2}/>
                         <Route path="/three" exact component={Back} />
-
+                        <Route path={"/cards/:id"} exact component={Cards}/>
+                        <Route path={"/cards2/:id2"} exact component={Cards2}/>
 
 
 
