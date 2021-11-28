@@ -16,7 +16,7 @@ const MainParts = (props) => {
 
             <div className="parts  col-sm-3  mt-4" key={index}>
                 <div className="box-img" >
-                    <img onClick = {() => props.getPartsId(datas.brand, props.history)} src={datas.image} alt=""/>
+                    <img onClick = {() => props.getPartsId(datas.id, props.history)} src={datas.image} alt=""/>
 
                 </div>
             </div>

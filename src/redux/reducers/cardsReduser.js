@@ -6,7 +6,8 @@ const initialState = {
     cards: [],
     cardsIn:[],
     colors:[],
-    updateState:""
+    updateState:"",
+    back:[]
 }
 
 

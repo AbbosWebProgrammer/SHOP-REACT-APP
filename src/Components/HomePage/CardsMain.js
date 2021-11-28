@@ -5,7 +5,7 @@ import axios from "axios";
 import {API_PATH} from "../../tools/constans";
 import {connect} from "react-redux";
 import {setState} from "../../redux/action/newAction";
-import {getCard} from "../../redux/action/cardsAction";
+import {getCard,getCardBack} from "../../redux/action/cardsAction";
 import data from "bootstrap/js/src/dom/data";
 import Back from "../Back";
 
@@ -29,13 +29,13 @@ const CardsMain = (props) => {
 
 
                 {
-                    props.cards.map((data) => (
+                    props.cards.splice(1,3).map((data,index) => (
 
                         // console.log(data),
                         // console.log("data")
 
 
-                        <div  className="incards text-decoration-none" key={data.id}>
+                        <div  className="incards text-decoration-none" key={index}>
 
                             <div className='kategoriya'>
 
@@ -49,29 +49,31 @@ const CardsMain = (props) => {
                                         <Back props={data.id}/>
                                     </div>
 
-                                    <Link to={"/three"} className="out text-decoration-none">
+                                    <Link to={"/three"} onClick={() => props.getCardBack(data.id , props.history) } className="out text-decoration-none">
 
                                         <div>
                                             <div className="position-relative mb-2">
 
                                                 <img className='w-100' src={API_PATH + data.colors[0].image[0].image} alt=""/>
-                                                <span className='pink'>{data.discounts} % </span>
+                                                <span className='pink'>{data.colors[0].discount} % </span>
                                             </div>
                                             <div>
 
-                                                <h4 className='size'>{data.price} sum <span
-                                                    className='old'>{data.oldprice} sum</span>
+                                                <h4 className='size'>{data.colors[0].price} sum <span
+                                                    className='old'>{data.colors[0].oldprice} sum</span>
                                                 </h4>
-                                                <div className="d-flex click">
-                                                    <h6>69 626 sum</h6>
-                                                    <div className="d-flex justify-content-between">
-                                                        <span className="mir"><p>vbhhjefvdsfregth</p></span>
-                                                        <span className="pay "><p>svfefdvdfas </p></span>
-                                                        <span className="sbp "><p>dvsefdffggf</p></span>
 
-                                                    </div>
+                                                {/*<div className="d-flex click">*/}
+                                                {/*    <h6>69 626 sum</h6>*/}
+                                                {/*    <div className="d-flex justify-content-between">*/}
+                                                {/*        <span className="mir"><p>vbhhjefvdsfregth</p></span>*/}
+                                                {/*        <span className="pay "><p>svfefdvdfas </p></span>*/}
+                                                {/*        <span className="sbp "><p>dvsefdffggf</p></span>*/}
 
-                                                </div>
+                                                {/*    </div>*/}
+
+                                                {/*</div>*/}
+                                                
                                                 <div className="pword">
                                                     <p className='pwordp w-auto'>{data.brand}/ {data.product}</p>
 
@@ -102,4 +104,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {setState, getCard})(CardsMain);
+export default connect(mapStateToProps, {setState, getCard,getCardBack})(CardsMain);

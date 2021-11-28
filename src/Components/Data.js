@@ -1,10 +1,10 @@
 
-
 import React, { useEffect, useState } from "react";
 import { Button, Modal, ModalBody } from "reactstrap";
 import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_PATH } from "../tools/constans";
+import { v4 as uuidv4 } from "uuid";
 
 const ModalExample = (props) => {
     const { buttonLabel = "Быстрый просмотр", className } = props;
@@ -24,9 +24,13 @@ const ModalExample = (props) => {
     const [color, setColor] = useState("");
     const [img, setImg] = useState(data);
     const [size, setSize] = useState();
+    const [changing, setChanging] = useState(false);
 
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+        setModal(!modal);
+        setChanging(false);
+    };
 
     const onChange = (e, color) => {
         setColor(e.target.value);
@@ -48,15 +52,18 @@ const ModalExample = (props) => {
         if (localStorage.getItem("basket")) {
             let obj = JSON.parse(localStorage.getItem("basket"));
             data1.size = size;
+            data1.uniqueid = uuidv4();
             data1.currentColor = currentColor.colorname;
             obj.push(data1);
             localStorage.setItem("basket", JSON.stringify(obj));
         } else {
             data1.size = size;
+            data1.uniqueid = uuidv4();
             data1.currentColor = currentColor.colorname;
             localStorage.setItem("basket", JSON.stringify([data1]));
         }
 
+        setChanging(!changing);
         //size
         // if (localStorage.getItem("size")) {
         //   let size = JSON.parse(localStorage.getItem("size"));
@@ -116,8 +123,8 @@ const ModalExample = (props) => {
                                 <div className="column-3">
                                     <div className="column-3-header">
                     <span className="d-flex">
-                      <h1>{data1.price} сумм</h1>&nbsp;
-                        <del>{data1.oldprice} сумм</del>
+                      <h1>{data1.colors[0].price} сумм</h1>&nbsp;
+                        <del>{data1.colors[0].oldprice} сумм</del>
                     </span>
                                         <h5>Цвет: {color}</h5>
                                         <div className="colors">
@@ -156,12 +163,26 @@ const ModalExample = (props) => {
                                         </div>
 
                                         <div className="buttons">
-                                            <button
-                                                className="to-basket"
-                                                onClick={(e) => addBasket(e, data1)}
-                                            >
-                                                Добавить в корзину
-                                            </button>
+                                            {changing ? (
+                                                <Link
+                                                    to="/korzina"
+                                                    className="to-basket"
+                                                    style={{
+                                                        textDecoration: "none",
+                                                        color: "#fff",
+                                                    }}
+                                                >
+                                                    Перейти в корзину
+                                                </Link>
+                                            ) : (
+                                                <span
+                                                    className="to-basket"
+                                                    onClick={(e) => addBasket(e, data1)}
+                                                >
+                          Добавить в корзину
+                        </span>
+                                            )}
+
                                             <button className="fast-order">Быстрый заказ</button>
                                         </div>
                                     </div>

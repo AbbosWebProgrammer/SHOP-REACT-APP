@@ -7,7 +7,7 @@ import {API_PATH} from "../tools/constans";
 import Back from "./Back";
 
 
-const Cards = (props) => {
+const FilterCards = (props) => {
 
     useEffect(() => {
         props.getParts();
@@ -17,7 +17,7 @@ const Cards = (props) => {
     return (
 
         <div
-        className="row cards mt-5">
+            className="row cards mt-5">
 
             {props.partscard.data.map((data, index) => (
                 <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
@@ -47,31 +47,31 @@ const Cards = (props) => {
                                     <h4 className='size'>{data.colors[0].price} sum
                                         <span className='old'>{data.colors[0].oldprice} sum</span>
                                         {/*<span className='pink'>{item.small}</span>*/}
-                                        </h4>
+                                    </h4>
                                     <div className="pword">
-                                            <p className='pwordp'>{data.brand}/ {data.productname}</p>
+                                        <p className='pwordp'>{data.brand}/ {data.productname}</p>
                                         {/*    <div className="star">*/}
                                         {/*        <div className="abs">{item.star}</div>*/}
                                         {/*        {item.abs}*/}
                                         {/*    </div>*/}
-                                        </div>
-                                        <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
-                                        {/*<div className="zed">gfd</div>*/}
                                     </div>
+                                    <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
+                                    {/*<div className="zed">gfd</div>*/}
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
-                    ))
+                </div>
+            ))
 
-                    }
-
-
-    </div>
+            }
 
 
-);
+        </div>
+
+
+    );
 }
 
 const mapStateToProps = (state) => {
@@ -84,15 +84,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{inform,getPartsId,getParts})(Cards);
-
-
-
-
-
-
-
-
-
-
-
+export default connect(mapStateToProps,{inform,getPartsId,getParts})(FilterCards);

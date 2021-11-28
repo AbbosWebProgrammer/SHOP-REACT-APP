@@ -1,3 +1,4 @@
+
 import React, {Component, useEffect, useState} from 'react';
 import {UncontrolledCollapse, CardBody, Card, Form, FormGroup, Label, Input,} from 'reactstrap';
 import axios from "axios";
@@ -6,23 +7,24 @@ import Back from "./Back";
 import Footer from "./Footer";
 import Cards from "./Cards";
 import {API_PATH} from "../tools/constans";
+import {getPartsId} from "../redux/action/mainPartsAction";
 import {connect} from "react-redux";
-import Cards2 from "./Cards2";
+import Cards3 from "./Cards3";
 import Navbar from "./Nav";
-import {getCarouselId} from "../redux/action/carouselAction";
 
 
-const Main2 = (props) => {
+const Main3 = (props) => {
 
     useEffect(() => {
-        props.getCarouselId();
+        props.getPartsId();
     },[])
 
 
     return (
 
-        <div>
-        <Navbar/>
+       <div>
+
+          <Navbar/>
 
         <div className="row main me-0">
 
@@ -205,7 +207,7 @@ const Main2 = (props) => {
 
 
 
-                    <Cards2/>
+                    <Cards3/>
 
                     <div className="texnika">
                         <div><h1>С этими товарами ищут</h1></div>
@@ -249,18 +251,16 @@ const Main2 = (props) => {
             </div>
         </div>
 
-            <Footer/>
+         <Footer/>
 
-        </div>
-
+       </div>
     );
 }
 
 const mapStateToProps = (state) => {
     return{
-        slideId: state.partM.slideId,
+        partsId: state.partM.partsId,
     }
 }
 
-export default connect(mapStateToProps,{getCarouselId}) (Main2);
-
+export default connect(mapStateToProps,{getPartsId}) (Main3);

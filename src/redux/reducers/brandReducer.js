@@ -3,6 +3,7 @@ import {SET_BRAND} from "../types/menusTypes";
 
 const initialState = {
     images:[],
+    imageId:[]
 };
 
 

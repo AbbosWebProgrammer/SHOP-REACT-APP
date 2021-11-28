@@ -1,47 +1,51 @@
 
-import React, {Component, useEffect} from 'react';
+import React, {Component, useEffect, useState} from 'react';
 import ModalExample from "./Data";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {slides,getCarousel,getCarouselId} from "../redux/action/carouselAction";
-// import {inform,getCarousel,getCarouselId} from "../redux/action/mainPartsAction";
+import {setBurger,getBurger,getBurgerId} from "../redux/action/burgerAction";
 import {API_PATH} from "../tools/constans";
+import Back from "./Back";
+import axios from "axios";
 
 
-const Cards2 = (props) => {
+const CardBurger = (props) => {
 
+    console.log('proooops',props)
 
     useEffect(() => {
-        props.getCarousel();
-        props.getCarouselId();
+        props.getBurgerId();
     },[])
+
+    // const [data, setData] = useState([]);
+    //
+    // useEffect(() => {
+    //     axios
+    //         .get(API_PATH + "api/ProductsByCategoryId/" + `${props.id}`)
+    //         .then((res) => {
+    //             setData(res.data);
+    //             // console.log(res.data);
+    //         })
+    //         .catch((err) => console.log("Aka aylaning"));
+    // }, []);
+
 
     return (
 
-        <div
-            className="row cards mt-5">
+        <div className="row cards mt-5">
 
-            {/*{console.log(props)}*/}
-            {/*{console.log("props.partscard")}*/}
-
-            {/*{*/}
-            {/*    props.slideId.data.map((data) => {*/}
-            {/*        console.log(data)*/}
-            {/*        console.log("dataslide")*/}
-            {/*    })*/}
-            {/*}*/}
-
-            {props.slideId.data.map((data, index) => {
-                if (props.slideId.data.length > 0)
-                    return (
+            {
+                props.menusId.data.map((data, index) => {
+                    if(props.menusId.data.length > 0)
+                    return(
                         <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
-                            <div className='kategoriya'>
+                            <div  className='kategoriya'>
 
                                 <div>
                                     <div className="prosmotr">
                                         <ModalExample id={data.id}/>
                                     </div>
-                                    <Link to={"/three"} className="out">
+                                    <Link to={"/three"}  className="out">
 
 
                                         <div className="foot">
@@ -58,12 +62,12 @@ const Cards2 = (props) => {
                                             <span className='pink'>{data.discounts} % </span>
                                         </div>
                                         <div>
-                                            {/*<h4 className='size'>{data.price} sum*/}
-                                            {/*    <span className='old'>{data.oldprice} sum</span>*/}
-                                            {/*    /!*<span className='pink'>{item.small}</span>*!/*/}
-                                            {/*</h4>*/}
+                                            <h4 className='size'>{data.price} sum
+                                                <span className='old'>{data.oldprice} sum</span>
+                                                {/*<span className='pink'>{item.small}</span>*/}
+                                            </h4>
                                             <div className="pword">
-                                                {/*<p className='pwordp'>{data.brand}/ {data.productname}</p>*/}
+                                                <p className='pwordp'>{data.brand}/ {data.productname}</p>
                                                 {/*    <div className="star">*/}
                                                 {/*        <div className="abs">{item.star}</div>*/}
                                                 {/*        {item.abs}*/}
@@ -78,12 +82,9 @@ const Cards2 = (props) => {
                             </div>
                         </div>
                     )
-
-
-            })
+                })
 
             }
-
 
 
         </div>
@@ -96,10 +97,9 @@ const mapStateToProps = (state) => {
 
 
     return{
-        slideId:state.carousel.slideId,
-        slide:state.carousel.slide,
+       menusId:state.burger.menusId
     }
 }
 
 
-export default connect(mapStateToProps,{slides,getCarousel,getCarouselId})(Cards2);
+export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId})(CardBurger);

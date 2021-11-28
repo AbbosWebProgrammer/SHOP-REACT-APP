@@ -11,7 +11,7 @@ export function setState (data) {
 
 
 
-export  const getCard = () => (dispatch) => {
+export  const getCard = () => (dispatch,getState) => {
 
 
     axios.get(API_PATH + "api/XitProducts/")
@@ -47,4 +47,14 @@ export  const getCardColor = () => (dispatch) => {
             dispatch(setState({colors:res.data}))
         })
 
+}
+
+export const getCardBack = (id ,history) => {
+   return function (dispatch,getState) {
+       axios.get(API_PATH + "/api/ProductInfo/" +id)
+           .then((res) => {
+               dispatch(setState({back:res.data.data}))
+               // history.push("/three")
+           })
+   }
 }

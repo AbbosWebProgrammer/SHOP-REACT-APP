@@ -15,6 +15,10 @@ import Korzina from "./HomePage/Korzina";
 import Cards from "./Cards";
 import Main2 from "./Main2";
 import Cards2 from "./Cards2";
+import Main3 from "./Main3";
+import MainBurger from "./MainBurger";
+import Register from "../pages/Register";
+import MainFilter from "./MainFilter";
 
 class MainRoot extends Component {
 
@@ -27,6 +31,9 @@ class MainRoot extends Component {
                         <Route path="/" exact component={Home} />
                         <Route path="/two" exact component={Wildberries} />
                         <Route path="/twooo" exact component={Main2}/>
+                        <Route path="/four" exact component={Main3}/>
+                        <Route path="/categorypage" exact component={MainBurger}/>
+                        <Route path="/filterpage" exact component={MainFilter}/>
                         <Route path="/three" exact component={Back} />
                         <Route path={"/cards/:id"} exact component={Cards}/>
                         <Route path={"/cards2/:id2"} exact component={Cards2}/>
@@ -36,6 +43,7 @@ class MainRoot extends Component {
                         <Route path="/login" exact component={Login} />
                         <Route path="/korzina" exact component={Korzina} />
                         <Route path="/enter" exact component={EnterNumber} />
+                        <Route path="/register" exact component={Register} />
 
                         <Route path="/admin/menus" exact component={AdminMenus} />
 

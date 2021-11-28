@@ -1,35 +1,99 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import Navbar from "../Nav";
 import Footer from "../Footer";
 import { Link } from "react-router-dom";
 import { API_PATH } from "../../tools/constans";
 
 const Korzina = () => {
-    let [number, setNumber] = useState(1);
-    let [price, setPrice] = useState({
-        price: "",
-    });
+    let [bool, setBool] = useState(true);
+    let [orders, setOrders] = useState(null);
+    let [currentNum, setCurrentNum] = useState("");
 
-    const inc = () => {
-        setNumber((prevNum) => prevNum + 1);
+    const plusone = (value) => {
+        return value + 1;
     };
-    const dec = () => {
-        setNumber((prevNum) => {
-            if (prevNum < 2) {
-                return (prevNum = 1);
+
+    const minusone = (value) => {
+        if (value < 3) {
+            return value;
+        } else {
+            return value - 1;
+        }
+    };
+
+    const inc = (e, order, q) => {
+        let quantity = q;
+        setCurrentNum(quantity);
+
+        const filtered = orders.map((item) => {
+            if (item.uniqueid === order.uniqueid) {
+                return { ...item, buy_quantity: 1 * quantity + 1 };
             } else {
-                return prevNum - 1;
+                return item;
             }
         });
+
+        localStorage.setItem("basket", JSON.stringify(filtered));
+    };
+    const dec = (e, order, q) => {
+        let quantity = q;
+        setCurrentNum(quantity);
+        const filtered = orders.map((item) => {
+            if (item.uniqueid === order.uniqueid) {
+                return {
+                    ...item,
+                    buy_quantity: 1 * quantity - 1,
+                };
+            } else {
+                return item;
+            }
+        });
+
+        localStorage.setItem("basket", JSON.stringify(filtered));
+    };
+    useEffect(() => {
+        const parsedOrders = JSON.parse(localStorage.getItem("basket"));
+        setOrders(parsedOrders);
+    }, [bool, currentNum]);
+
+    // const foo = (data, key) => {
+    //   return [...new Map(data.map((x) => [key(x), x])).values()];
+    // };
+
+    // let uniqueOrders = orders && foo(orders, (it) => it.id);
+
+    const onDelete = (e, id) => {
+        const filtered = orders.filter((order) => order.uniqueid !== id);
+        localStorage.setItem("basket", JSON.stringify(filtered));
+        setBool(!bool);
     };
 
-    let orders = JSON.parse(localStorage.getItem("basket"));
+    const summ = (chosenOrders) => {
+        const summ =
+            chosenOrders &&
+            chosenOrders.map((order) => 1 * order.price * 1 * order.buy_quantity);
 
-    const foo = (data, key) => {
-        return [...new Map(data.map((x) => [key(x), x])).values()];
+        let finalSumm = 0;
+
+        for (let i = 0; i < summ.length; i++) {
+            finalSumm = finalSumm + summ[i];
+        }
+        return finalSumm;
     };
 
-    let uniqueOrders = orders && foo(orders, (it) => it.id);
+    const summDel = (chosenOrders) => {
+        const summ =
+            chosenOrders &&
+            chosenOrders.map((order) => 1 * order.oldprice * 1 * order.buy_quantity);
+
+        let finalSumm = 0;
+
+        for (let i = 0; i < summ.length; i++) {
+            finalSumm = finalSumm + summ[i];
+        }
+
+        return finalSumm;
+    };
 
     return (
         <React.Fragment>
@@ -39,17 +103,15 @@ const Korzina = () => {
                     <div className="basket">
                         <h1 className="title">
                             Корзина{" "}
-                            <sup className="sup-basket">
-                                {uniqueOrders ? uniqueOrders.length : 0}
-                            </sup>
+                            <sup className="sup-basket">{orders ? orders.length : 0}</sup>
                         </h1>
-                        {/*<label htmlFor="o-c" className="handler">*/}
-                        {/*    <i className="fas fa-list"></i>*/}
-                        {/*</label>*/}
-                        {/*<input type="checkbox" id="o-c" className="o-c" />*/}
+                        <label htmlFor="o-c" className="handler">
+                            <i className="fas fa-list"></i>
+                        </label>
+                        <input type="checkbox" id="o-c" className="o-c" />
                         <div className="orders-list">
-                            {uniqueOrders &&
-                            uniqueOrders.map((order) => (
+                            {orders &&
+                            orders.map((order) => (
                                 <div className="orders-list-item">
                                     <div className="order-image">
                                         <img src={API_PATH + order.colors[0].image[0].image} />
@@ -57,21 +119,34 @@ const Korzina = () => {
                                     <div className="order-content">
                                         <span>{order.productname}</span>
                                         <span>Цветь: {order.currentColor}</span>
-                                        <span>Размер: {order.size.ordersize}</span>
+                                        <span>Размер: {order.size && order.size.ordersize}</span>
                                         <span>Бренд: {order.brand}</span>
                                     </div>
                                     <div className="order-inc-dec">
-                      <span className="dec" onClick={dec}>
-                        <i className="fas fa-minus"></i>
-                      </span>
-                                        <span className="num">{number}</span>
-                                        <span className="inc" onClick={inc}>
-                        <i className="fas fa-plus"></i>
-                      </span>
+                                        <button
+                                            disabled={1 * order.buy_quantity === 1 ? true : false}
+                                            className="dec"
+                                            onClick={(e) => dec(e, order, order.buy_quantity)}
+                                        >
+                                            -
+                                        </button>
+                                        <span className="num">{1 * order.buy_quantity}</span>
+                                        <button
+                                            className="inc"
+                                            onClick={(e) => inc(e, order, order.buy_quantity)}
+                                        >
+                                            +
+                                        </button>
                                     </div>
                                     <div className="order-price">
-                                        <h3>{number * order.price} сум</h3>
-                                        <del>{number * order.oldprice} сум</del>
+                                        <h3>{1 * order.buy_quantity * order.price} сум</h3>
+                                        <del>{1 * order.buy_quantity * order.oldprice} сум</del>
+                                    </div>
+                                    <div className="order-delete">
+                                        <i
+                                            className="fas fa-trash delete-button"
+                                            onClick={(e) => onDelete(e, order.uniqueid)}
+                                        ></i>
                                     </div>
                                 </div>
                             ))}
@@ -146,11 +221,11 @@ const Korzina = () => {
                     <div className="form-order">
                         <div className="total">
                             <h1 className="title">Итого</h1>
-                            <p className="money">0 ₽</p>
+                            <p className="money">{orders ? summ(orders) : 0} сум</p>
                         </div>
                         <div className="order-send">
-                            <p>Товары, 0 шт.</p>
-                            <p>0 ₽</p>
+                            <p>Товары, {orders && orders.length} шт.</p>
+                            <del>{orders ? summDel(orders) : 0} сум </del>
                         </div>
                         <div className="order-address">
               <span className="order-address-title">

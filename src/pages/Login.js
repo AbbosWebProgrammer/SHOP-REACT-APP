@@ -5,7 +5,7 @@ import {login} from "../redux/action/loginAction";
 
 
 const Login = (props) => {
-    console.log(props)
+
     return (
 
         <div className="container">

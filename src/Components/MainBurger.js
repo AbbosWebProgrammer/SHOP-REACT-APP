@@ -1,3 +1,4 @@
+
 import React, {Component, useEffect, useState} from 'react';
 import {UncontrolledCollapse, CardBody, Card, Form, FormGroup, Label, Input,} from 'reactstrap';
 import axios from "axios";
@@ -6,23 +7,23 @@ import Back from "./Back";
 import Footer from "./Footer";
 import Cards from "./Cards";
 import {API_PATH} from "../tools/constans";
+import {getBurgerId} from "../redux/action/burgerAction";
 import {connect} from "react-redux";
-import Cards2 from "./Cards2";
+import CardBurger from "./CardBurger";
 import Navbar from "./Nav";
-import {getCarouselId} from "../redux/action/carouselAction";
 
 
-const Main2 = (props) => {
+const Main = (props) => {
 
     useEffect(() => {
-        props.getCarouselId();
+        props.getBurgerId();
     },[])
 
 
     return (
-
         <div>
-        <Navbar/>
+
+            <Navbar/>
 
         <div className="row main me-0">
 
@@ -203,9 +204,7 @@ const Main2 = (props) => {
                     </div>
 
 
-
-
-                    <Cards2/>
+                    <CardBurger/>
 
                     <div className="texnika">
                         <div><h1>С этими товарами ищут</h1></div>
@@ -250,17 +249,14 @@ const Main2 = (props) => {
         </div>
 
             <Footer/>
-
         </div>
-
     );
 }
 
 const mapStateToProps = (state) => {
     return{
-        slideId: state.partM.slideId,
+        menus:state.burger.menus,
     }
 }
 
-export default connect(mapStateToProps,{getCarouselId}) (Main2);
-
+export default connect(mapStateToProps,{getBurgerId}) (Main);

@@ -4,26 +4,29 @@ import MainModal from "./MainModal";
 import Footer from "./Footer";
 import ModalExample from "./Data";
 import {connect} from "react-redux";
-import {setState,getCard} from "../redux/action/cardsAction";
+import {setState,getCard,getCardBack} from "../redux/action/cardsAction";
 import axios from "axios";
 import {API_PATH} from "../tools/constans";
 import {Modal, ModalBody} from "reactstrap";
 import {Link} from "react-router-dom";
 
+
+
 const Back = (props) => {
 
-    console.log(props)
-    console.log("propswer")
-
     useEffect(() => {
-        axios
-            .get(API_PATH + "/api/ProductInfo/" + `${props.props}`)
-            .then((res) => {
-                setData(res.data.data);
-                // console.log(res.data);
-            })
-            .catch((err) => console.log("Aka aylaning"));
-    }, []);
+        props.getCardBack();
+    },[])
+
+    // useEffect(() => {
+    //     axios
+    //         .get(API_PATH + "/api/ProductInfo/" + `${props.props}`)
+    //         .then((res) => {
+    //             setData(res.data.data);
+    //             // console.log(res.data);
+    //         })
+    //         .catch((err) => console.log("Aka aylaning"));
+    // }, []);
 
 
     const [data, setData] = useState([]);
@@ -72,9 +75,9 @@ const Back = (props) => {
                 <Nav/>
 
                 <div className="mt-5">
-                    <h1>{props.props}</h1>
-                    {data.map((data1) => (
-                        <div className="artikul">
+
+                    {props.back.map((data1,index) => (
+                        <div className="artikul" key={index}>
                             <div>
                                 {/*<div className="btn-close" onClick={toggle}></div>*/}
                                 <h1 key={data1.id}>{data1.productname}</h1>
@@ -114,18 +117,15 @@ const Back = (props) => {
                                 <div className="column-3">
                                     <div className="column-3-header">
                     <span className="d-flex">
-                      <h1>{data1.price} сумм</h1>&nbsp;
-                        <del>{data1.oldprice} сумм</del>
+                      <h1>{data1.colors[0].price} сумм</h1>&nbsp;
+                        <del>{data1.colors[0].oldprice} сумм</del>
                     </span>
                                         <h5>Цвет: {color}</h5>
                                         <div className="colors">
                                             {data1.colors.map((color, index) => (
                                                 <div className="colors-field">
                                                     <label htmlFor={index} className="label">
-                                                        <img
-                                                            src={API_PATH + color.image[1].image}
-                                                            className="color-image"
-                                                        />
+                                                        <img src={API_PATH + color.image[1].image} className="color-image"/>
                                                     </label>
                                                     <input
                                                         type="radio"
@@ -229,6 +229,13 @@ const Back = (props) => {
 
 };
 
+const mapStateToProps = (state) => {
+    return{
+        back:state.cardsR.back,
+    }
+};
 
 
-export default Back;
+
+
+export default connect(mapStateToProps,{setState,getCardBack})(Back);

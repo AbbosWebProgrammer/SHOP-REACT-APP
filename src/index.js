@@ -3,10 +3,12 @@ import ReactDOM from 'react-dom';
 
 
 import  'bootstrap/dist/css/bootstrap.min.css';
-import './sass/main.scss'
+
 import './sass/main-admin.scss'
 
+import './sass/main.scss'
 
+import 'semantic-ui-css/semantic.min.css'
 
 import {applyMiddleware, compose, createStore} from "redux";
 import {Provider} from "react-redux";
@@ -16,6 +18,9 @@ import thunk from "redux-thunk";
 
 import MainRoot from "./Components/MainRoot";
 import MainParts from "./Components/HomePage/MainParts";
+import {Zoom} from "./Components/zoom/ZoomHower";
+import AppF from "./Components/Filters";
+
 
 // , window.__REDUX_DEVTOOLS_EXTENSION__ && window.__REDUX_DEVTOOLS_EXTENSION__()
 

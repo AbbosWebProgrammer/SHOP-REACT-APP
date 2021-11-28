@@ -3,6 +3,8 @@ import axios from "axios";
 import {API_PATH} from "../../tools/constans";
 
 
+const jsonList=API_PATH +"api/ProductInfo/"
+
 export function setBurger(data) {
     return{
         type:SET_BURGER,
@@ -10,9 +12,40 @@ export function setBurger(data) {
     }
 }
 
-export const getBurger = () => (dispatch) => {
+export const getBurger = () => (dispatch, getState) => {
     axios.get(API_PATH + "api/Allcategory/")
         .then((res) => {
             dispatch(setBurger({menus:res.data.data}))
         })
 }
+
+
+export const getBurgerId = (id, history) => {
+
+
+    return function (dispatch , getState) {
+        axios.get(API_PATH + "api/ProductsByCategoryId/" + id)
+            .then((res) => {
+                console.log(res.data)
+                dispatch(setBurger({menusId:res.data}));
+                    history.push("/categorypage")
+
+
+            })
+    }
+}
+
+//
+// function search(jsonList, searchText) {
+//     return jsonList.filter(function(x) {
+//         for (var i in x) {
+//             if (x[i].toLowerCase().indexOf(searchText.toLowerCase()) > -1) return x;
+//         }
+//     })
+// }
+// console.log(search(jsonList, 'search'))
+
+
+
+
+

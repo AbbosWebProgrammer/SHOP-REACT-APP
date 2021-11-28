@@ -9,7 +9,7 @@ import CardsMain from "./CardsMain";
 import MainParts from "./MainParts";
 import Brends from "./Brends";
 import {connect} from "react-redux";
-import {inform,getPartsB, getPartsId} from "../../redux/action/mainPartsAction";
+import {inform,getPartsB, getPartsIdss} from "../../redux/action/mainPartsAction";
 
 
 import Wildberries from "../Wildberries";
@@ -30,9 +30,9 @@ const Home = (props) => {
 
 
             <div className="home">
-                <Navbar/>
+                <Navbar history={props.history}/>
                 <div className="main-part p-5 pt-0">
-              <CarouselMain/>
+              <CarouselMain history={props.history}/>
 
                 <MainParts history={props.history}/>
 
@@ -46,7 +46,7 @@ const Home = (props) => {
                             props.partsB.map((datas,index) => (
                                 <div className="parts  col-6  mt-4" key={index}>
                                 <div className="half" >
-                                    <img onClick = {() => props.getPartsId(datas.brand, props.history)} src={datas.image} alt=""/>
+                                    <img onClick = {() => props.getPartsIdss(datas.brand, props.history)} src={datas.image} alt=""/>
 
                                 </div>
                                 </div>
@@ -60,7 +60,7 @@ const Home = (props) => {
 
                     <CardsMain/>
 
-                    <Brends/>
+                    <Brends history={props.history}/>
 
                 </div>
 
@@ -80,4 +80,4 @@ const mapStateToProps = (state) => {
 };
 
 
-export default connect(mapStateToProps,{inform,getPartsB, getPartsId})(Home);
+export default connect(mapStateToProps,{inform,getPartsB, getPartsIdss})(Home);

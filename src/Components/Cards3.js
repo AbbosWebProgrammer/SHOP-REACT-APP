@@ -1,25 +1,26 @@
+
 import React, {Component, useEffect} from 'react';
 import ModalExample from "./Data";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {inform,getPartsId,getParts} from "../redux/action/mainPartsAction";
+import {setBurger,getBurger,getBurgerId} from "../redux/action/burgerAction";
 import {API_PATH} from "../tools/constans";
 import Back from "./Back";
 
 
-const Cards = (props) => {
+const Cards3 = (props) => {
 
     useEffect(() => {
-        props.getParts();
-        props.getPartsId();
+        props.getBurger();
+        props.getBurgerId();
     },[])
 
     return (
 
         <div
-        className="row cards mt-5">
+            className="row cards mt-5">
 
-            {props.partscard.data.map((data, index) => (
+            {props.imageId.map((data, index) => (
                 <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
                     <div  className='kategoriya'>
 
@@ -28,7 +29,6 @@ const Cards = (props) => {
                                 <ModalExample id={data.id}/>
                             </div>
                             <Link to={"/three"}  className="out">
-
 
                                 <div className="foot">
                                     <div className="example"></div>
@@ -47,52 +47,41 @@ const Cards = (props) => {
                                     <h4 className='size'>{data.colors[0].price} sum
                                         <span className='old'>{data.colors[0].oldprice} sum</span>
                                         {/*<span className='pink'>{item.small}</span>*/}
-                                        </h4>
+                                    </h4>
                                     <div className="pword">
-                                            <p className='pwordp'>{data.brand}/ {data.productname}</p>
+                                        <p className='pwordp'>{data.brand}/ {data.productname}</p>
                                         {/*    <div className="star">*/}
                                         {/*        <div className="abs">{item.star}</div>*/}
                                         {/*        {item.abs}*/}
                                         {/*    </div>*/}
-                                        </div>
-                                        <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
-                                        {/*<div className="zed">gfd</div>*/}
                                     </div>
+                                    <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
+                                    {/*<div className="zed">gfd</div>*/}
                                 </div>
-
                             </div>
+
                         </div>
                     </div>
-                    ))
+                </div>
+            ))
 
-                    }
-
-
-    </div>
+            }
 
 
-);
+        </div>
+
+
+    );
 }
 
 const mapStateToProps = (state) => {
 
 
     return{
-        parts:state.partM.parts,
-        partscard: state.partM.partscard
+        images:state.brends.images,
+        imageId:state.brends.imageId
     }
 }
 
 
-export default connect(mapStateToProps,{inform,getPartsId,getParts})(Cards);
-
-
-
-
-
-
-
-
-
-
-
+export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId})(Cards3);

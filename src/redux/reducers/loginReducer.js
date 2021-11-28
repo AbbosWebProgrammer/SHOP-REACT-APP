@@ -1,6 +1,7 @@
 
 const initialState ={
-    isLoading:false
+    isLoading:false,
+    form:'login'
 }
 
 export const loginReducer = (state = initialState, action) => {

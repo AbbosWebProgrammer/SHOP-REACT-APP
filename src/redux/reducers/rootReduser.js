@@ -13,7 +13,7 @@ export const rootReducer = combineReducers({
     menus:menusReducer,
     cardsR:cardsReduser,
     partM:mainPartsReduser,
-    // carousel:carouselReduser,
+    carousel:carouselReduser,
     brends:brendsReduser,
     burger:burgerReduser,
 
