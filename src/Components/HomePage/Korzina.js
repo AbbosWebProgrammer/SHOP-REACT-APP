@@ -21,6 +21,8 @@ const Korzina = () => {
         }
     };
 
+    console.log(orders)
+
     const inc = (e, order, q) => {
         let quantity = q;
         setCurrentNum(quantity);
@@ -71,7 +73,7 @@ const Korzina = () => {
     const summ = (chosenOrders) => {
         const summ =
             chosenOrders &&
-            chosenOrders.map((order) => 1 * order.price * 1 * order.buy_quantity);
+            chosenOrders.map((order) => 1 * order.currentPrice * 1 * order.buy_quantity);
 
         let finalSumm = 0;
 
@@ -84,7 +86,7 @@ const Korzina = () => {
     const summDel = (chosenOrders) => {
         const summ =
             chosenOrders &&
-            chosenOrders.map((order) => 1 * order.oldprice * 1 * order.buy_quantity);
+            chosenOrders.map((order) => 1 * order.currentOldprice * 1 * order.buy_quantity);
 
         let finalSumm = 0;
 
@@ -113,6 +115,7 @@ const Korzina = () => {
                             {orders &&
                             orders.map((order) => (
                                 <div className="orders-list-item">
+                                    <div className="d-flex">
                                     <div className="order-image">
                                         <img src={API_PATH + order.colors[0].image[0].image} />
                                     </div>
@@ -121,6 +124,7 @@ const Korzina = () => {
                                         <span>Цветь: {order.currentColor}</span>
                                         <span>Размер: {order.size && order.size.ordersize}</span>
                                         <span>Бренд: {order.brand}</span>
+                                    </div>
                                     </div>
                                     <div className="order-inc-dec">
                                         <button
@@ -139,8 +143,8 @@ const Korzina = () => {
                                         </button>
                                     </div>
                                     <div className="order-price">
-                                        <h3>{1 * order.buy_quantity * order.price} сум</h3>
-                                        <del>{1 * order.buy_quantity * order.oldprice} сум</del>
+                                        <h3>{ 1 * order.buy_quantity * 1 * order.currentPrice} сум</h3>
+                                        <del>{1 * order.buy_quantity * 1 * order.currentOldprice} сум</del>
                                     </div>
                                     <div className="order-delete">
                                         <i

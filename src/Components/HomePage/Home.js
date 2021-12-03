@@ -44,7 +44,7 @@ const Home = (props) => {
 
                         {
                             props.partsB.map((datas,index) => (
-                                <div className="parts  col-6  mt-4" key={index}>
+                                <div className="parts  col-6 mt-4" key={index}>
                                 <div className="half" >
                                     <img onClick = {() => props.getPartsIdss(datas.brand, props.history)} src={datas.image} alt=""/>
 

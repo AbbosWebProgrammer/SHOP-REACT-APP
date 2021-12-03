@@ -5,7 +5,7 @@ import { ToastContainer } from 'react-toastify';
 import MainParts from "./HomePage/MainParts";
 import Login from "../pages/Login";
 import EnterNumber from "../pages/EnterNumber";
-import AdminMenus from "../pages/AdminMenus";
+import AdminMenus from "../pages/dashboard/AdminMenus";
 
 
 import {BrowserRouter,Switch,Route} from "react-router-dom"
@@ -19,6 +19,7 @@ import Main3 from "./Main3";
 import MainBurger from "./MainBurger";
 import Register from "../pages/Register";
 import MainFilter from "./MainFilter";
+import Verify from "../pages/Verify";
 
 class MainRoot extends Component {
 
@@ -38,6 +39,7 @@ class MainRoot extends Component {
                         <Route path={"/cards/:id"} exact component={Cards}/>
                         <Route path={"/cards2/:id2"} exact component={Cards2}/>
 
+                        <Route path={"/message"} exact component={Verify}/>
 
 
                         <Route path="/login" exact component={Login} />

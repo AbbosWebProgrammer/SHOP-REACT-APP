@@ -43,7 +43,7 @@ export function enternumber(event, errors, values, history) {
                 console.log(res);
                 localStorage.setItem(TOKEN_NAME,res.data.token);
                 dispatch({type: ""});
-                history.push("/admin/menus");
+                // history.push("/admin/menus");
 
             })
             .catch((error) => {

@@ -33,15 +33,19 @@ const ModalExample = (props) => {
     };
 
     const onChange = (e, color) => {
-        setColor(e.target.value);
+        setColor(color.color);
         setCurrentColor(color);
+
     };
+
+
 
     const onMouseEnter = (e, imgage) => {
         setImg(imgage);
     };
 
     const addSize = (e, ordersize, id) => {
+        e.preventDefault()
         setSize({ ...size, id, ordersize });
     };
 
@@ -53,13 +57,18 @@ const ModalExample = (props) => {
             let obj = JSON.parse(localStorage.getItem("basket"));
             data1.size = size;
             data1.uniqueid = uuidv4();
-            data1.currentColor = currentColor.colorname;
+            data1.currentColor = currentColor.color;
+            data1.currentPrice = currentColor.price
+            data1.currentOldprice = currentColor.oldprice
+
             obj.push(data1);
             localStorage.setItem("basket", JSON.stringify(obj));
         } else {
             data1.size = size;
             data1.uniqueid = uuidv4();
-            data1.currentColor = currentColor.colorname;
+            data1.currentColor = currentColor.color;
+            data1.currentPrice = currentColor.price
+            data1.currentOldprice = currentColor.oldprice
             localStorage.setItem("basket", JSON.stringify([data1]));
         }
 
@@ -73,6 +82,37 @@ const ModalExample = (props) => {
         //   localStorage.setItem("size", JSON.stringify([size]));
         // }
     };
+
+    const [modalin, setModalin] = useState(false);
+    const togglein = () => setModalin(!modalin);
+
+    //fast-order-form
+    const [formdata, setFormdata] = useState({
+        data: {},
+        name: '',
+        phone: ''
+    })
+    const onSubmit = async e => {
+        e.preventDefault()
+        setFormdata({
+            ...formdata,
+            data: currentColor
+        })
+        try {
+           await axios.post('http://abboskakhkhorov.pythonanywhere.com/api/OrderAndOrderDetailsJson/', formdata, {Headers:{ 'Content-Type': 'application/json' }})
+        } catch (e) {
+            console.log(e)
+        }
+
+
+    }
+
+    const onSubmitHandler = e => {
+        setFormdata({
+            ...formdata,
+            [e.target.name]: e.target.value
+        })
+    }
 
     return (
         <div>
@@ -126,7 +166,7 @@ const ModalExample = (props) => {
                       <h1>{data1.colors[0].price} сумм</h1>&nbsp;
                         <del>{data1.colors[0].oldprice} сумм</del>
                     </span>
-                                        <h5>Цвет: {color}</h5>
+                                        <h5>Цвет: {color ? color : data1.colors[0].color}</h5>
                                         <div className="colors">
                                             {data1.colors.map((color, index) => (
                                                 <div className="colors-field">
@@ -152,13 +192,13 @@ const ModalExample = (props) => {
                                                     ? currentColor.size
                                                     : data1.colors[0].size
                                             ).map((item) => (
-                                                <div
+                                                <button
                                                     className="sizes-size"
                                                     onClick={(e) => addSize(e, item.size, data1.id)}
                                                 >
                                                     <span className="size-title">{item.size}</span>
                                                     <span className="size-sub">{item.quantity}</span>
-                                                </div>
+                                                </button>
                                             ))}
                                         </div>
 
@@ -183,7 +223,27 @@ const ModalExample = (props) => {
                         </span>
                                             )}
 
-                                            <button className="fast-order">Быстрый заказ</button>
+                                            {/*<button >Быстрый заказ</button>*/}
+                                            <Button className="fast-order" onClick={togglein}>
+                                                Быстрый заказ
+                                            </Button>
+                                            <Modal isOpen={modalin} toggle={togglein} className={'fast-order-back'}>
+                                                <ModalBody className={'fast-order-mod'}>
+                                                    <form className={'fast-order-form'} onSubmit={e => onSubmit(e)}>
+                                                        <div className="field">
+                                                            <label htmlFor="name">Имя клиента</label>
+                                                            <input value={formdata.name} onChange={e => onSubmitHandler(e)} type="text" placeholder={'Имя...'} className={'input'} name={'name'} id={'name'}/>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label htmlFor="number">Номер для обратного звонка</label>
+                                                            <input value={formdata.phone} name={'phone'} onChange={e => onSubmitHandler(e)} type="number" placeholder={'Телефон номер...'} className={'input'}/>
+                                                        </div>
+                                                        <div className="field">
+                                                            <button type={'submit'} className={'button'}>Отправить</button>
+                                                        </div>
+                                                    </form>
+                                                </ModalBody>
+                                            </Modal>
                                         </div>
                                     </div>
                                 </div>

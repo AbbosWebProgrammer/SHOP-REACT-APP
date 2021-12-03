@@ -7,9 +7,9 @@ import {connect} from "react-redux";
 import {setState,getCard,getCardBack} from "../redux/action/cardsAction";
 import axios from "axios";
 import {API_PATH} from "../tools/constans";
-import {Modal, ModalBody} from "reactstrap";
+import {Button, Modal, ModalBody} from "reactstrap";
 import {Link} from "react-router-dom";
-
+import { v4 as uuidv4 } from "uuid";
 
 
 const Back = (props) => {
@@ -34,12 +34,16 @@ const Back = (props) => {
     const [color, setColor] = useState("");
     const [img, setImg] = useState(data);
     const [size, setSize] = useState();
+    const [changing, setChanging] = useState(false);
 
     const [modal, setModal] = useState(false);
-    const toggle = () => setModal(!modal);
+    const toggle = () => {
+        setModal(!modal);
+        setChanging(false);
+    };
 
     const onChange = (e, color) => {
-        setColor(e.target.value);
+        setColor(color.color);
         setCurrentColor(color);
     };
 
@@ -47,7 +51,9 @@ const Back = (props) => {
         setImg(imgage);
     };
 
+
     const addSize = (e, ordersize, id) => {
+        e.preventDefault()
         setSize({ ...size, id, ordersize });
     };
 
@@ -58,18 +64,59 @@ const Back = (props) => {
         if (localStorage.getItem("basket")) {
             let obj = JSON.parse(localStorage.getItem("basket"));
             data1.size = size;
-            data1.currentColor = currentColor.colorname;
+            data1.uniqueid = uuidv4();
+            data1.currentColor = currentColor.color;
+            data1.currentPrice = currentColor.price
+            data1.currentOldprice = currentColor.oldprice
+
             obj.push(data1);
             localStorage.setItem("basket", JSON.stringify(obj));
         } else {
             data1.size = size;
-            data1.currentColor = currentColor.colorname;
+            data1.uniqueid = uuidv4();
+            data1.currentColor = currentColor.color;
+            data1.currentPrice = currentColor.price
+            data1.currentOldprice = currentColor.oldprice
             localStorage.setItem("basket", JSON.stringify([data1]));
         }
+        setChanging(!changing);
     }
 
 
-        return (
+
+    const [modalin, setModalin] = useState(false);
+    const togglein = () => setModalin(!modalin);
+
+    //fast-order-form
+    const [formdata, setFormdata] = useState({
+        data: {},
+        name: '',
+        phone: ''
+    })
+    const onSubmit = async e => {
+        e.preventDefault()
+        setFormdata({
+            ...formdata,
+            data: currentColor
+        })
+        try {
+            await axios.post('/sss', formdata, {Headers:{ 'Content-Type': 'application/json' }})
+        } catch (e) {
+            console.log(e)
+        }
+
+
+    }
+
+    const onSubmitHandler = e => {
+        setFormdata({
+            ...formdata,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
+    return (
             <div >
 
                 <Nav/>
@@ -120,7 +167,7 @@ const Back = (props) => {
                       <h1>{data1.colors[0].price} сумм</h1>&nbsp;
                         <del>{data1.colors[0].oldprice} сумм</del>
                     </span>
-                                        <h5>Цвет: {color}</h5>
+                                        <h5>Цвет:{color ? color : data1.colors[0].color}</h5>
                                         <div className="colors">
                                             {data1.colors.map((color, index) => (
                                                 <div className="colors-field">
@@ -154,13 +201,49 @@ const Back = (props) => {
                                         {/*</div>*/}
 
                                         <div className="buttons">
-                                            <button
-                                                className="to-basket"
-                                                onClick={(e) => addBasket(e, data1)}
-                                            >
-                                                Добавить в корзину
-                                            </button>
-                                            <button className="fast-order">Быстрый заказ</button>
+                                            {changing ? (
+                                                <Link
+                                                    to="/korzina"
+                                                    className="to-basket"
+                                                    style={{
+                                                        textDecoration: "none",
+                                                        color: "#fff",
+                                                    }}
+                                                >
+                                                    Перейти в корзину
+                                                </Link>
+                                            ) : (
+                                                <span
+                                                    className="to-basket"
+                                                    onClick={(e) => addBasket(e, data1)}
+                                                >
+                          Добавить в корзину
+                        </span>
+                                            )}
+
+                                            <Button className="fast-order" onClick={togglein}>
+                                                Быстрый заказ
+                                            </Button>
+
+                                            <Modal isOpen={modalin} toggle={togglein} className={'fast-order-back'}>
+                                                <ModalBody className={'fast-order-mod'}>
+                                                    <form className={'fast-order-form'} onSubmit={e => onSubmit(e)}>
+                                                        <div className="field">
+                                                            <label htmlFor="name">Имя клиента</label>
+                                                            <input value={formdata.name} onChange={e => onSubmitHandler(e)} type="text" placeholder={'Имя...'} className={'input'} name={'name'} id={'name'}/>
+                                                        </div>
+                                                        <div className="field">
+                                                            <label htmlFor="number">Номер для обратного звонка</label>
+                                                            <input value={formdata.phone} name={'phone'} onChange={e => onSubmitHandler(e)} type="number" placeholder={'Телефон номер...'} className={'input'}/>
+                                                        </div>
+                                                        <div className="field">
+                                                            <button type={'submit'} className={'button'}>Отправить</button>
+                                                        </div>
+                                                    </form>
+                                                </ModalBody>
+                                            </Modal>
+
+
                                         </div>
                                     </div>
                                 </div>

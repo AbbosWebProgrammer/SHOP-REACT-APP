@@ -19,7 +19,7 @@ const Navbar = (props) => {
 
     const [APIData, setAPIData] = useState([])
     const [filteredResults, setFilteredResults] = useState([]);
-    const [searchInput, setSearchInput] = useState('');
+    const [inputValue, setInputValue] = useState('')
     useEffect(() => {
         axios.get(API_PATH + "api/ProductInfo/")
             .then((response) => {
@@ -27,28 +27,24 @@ const Navbar = (props) => {
             })
     }, [])
 
+    // useEffect(() => {
+    //     const pro = APIData.map(item => console.log(item))
+    //     // console.log(pro)
+    // }, [])
+
     // axios.post(API_PATH + "api/ProductInfo/" + searchItems())
 
-    const searchItems = (searchValue) => {
-        setSearchInput(searchValue)
-        if (searchInput !== '') {
-            const filteredData = APIData.filter((items) => {
-                return Object.values(items).join('').toLowerCase().includes(searchInput.toLowerCase())
-            })
-            setFilteredResults(filteredData)
-        }
-        else{
-            setFilteredResults(APIData)
-        }
+    const searchItems = (e) => {
+        setInputValue(e.target.value)
+        const allBrands = APIData.filter(item => e.target.value.toLowerCase() === item.brand.toLowerCase())
+        // const allBrands = APIData.map(item => {
+        //     if(item.brand.toLowerCase().includes(e.target.value)) {
+        //         return item.brand
+        //     }
+        // })
+        console.log(allBrands)
+        setFilteredResults(allBrands)
     }
-
-
-
-    const [isOpen, setIsOpen] = useState(false);
-    const handleShow = () => setIsOpen(true);
-
-
-
 
         return (
             <div className="nav-box">
@@ -71,20 +67,20 @@ const Navbar = (props) => {
                                     Бесплатная доставка
                                 </a>
                             </li>
+                            {/*<li>*/}
+                            {/*    <a className="navbar-one-button" href="#">*/}
+                            {/*        Продавайте на Alsafia*/}
+                            {/*    </a>*/}
+                            {/*</li>*/}
                             <li>
-                                <a className="navbar-one-button" href="#">
-                                    Продавайте на Alsafia
-                                </a>
-                            </li>
-                            <li>
-                                <a className="navbar-one-button" href="#">
+                                <a className="navbar-one-button" href="https://alsafia-cpa.uz/">
                                     Стать партнёром Alsafia
                                 </a>
                             </li>
                         </ul>
                         <ul className="d-flex justify-content-end  ">
                             <li>
-                                <a className="navbar-two-button" href="#">
+                                <a className="navbar-two-button" href="https://t.me/Manager_saisolo/">
                                     Сообщить о проблеме
                                 </a>
                             </li>
@@ -107,10 +103,10 @@ const Navbar = (props) => {
                                                 <div key={index} className='name mt-4'>
                                                     {/*{`name-tabler d-flex ${props.show? "show" : ""}`} onMouseEnter={() => props.setBurger({show: ! props.show})}*/}
                                                     <div className="name-tabler">
-                                                    <div onClick={() => props.getBurgerId(item.id,props.history)} className="name-table d-flex" >
+                                                    <Link to={"/categorypage"} onClick={() => props.getBurgerId(item.id,props.history)} className="name-table d-flex" >
                                                         <img className='user me-2' src={item.image} alt=""/>
                                                         <h4>{item.categoryname}</h4>
-                                                    </div>
+                                                    </Link>
 
 
 
@@ -169,7 +165,7 @@ const Navbar = (props) => {
 
 
 
-                                <div className="close" id="toggler1">X</div>
+                                <div className="close" id="toggler1" >X</div>
                             </UncontrolledCollapse>
 
                         </div>
@@ -178,37 +174,34 @@ const Navbar = (props) => {
                                 <img src="https://alsafia.uz/img/logotip.png" alt=""/>
                             </Link>
                         </div>
-                        <div className="for-input ">
+                        <div className="for-input">
                             <input type="text"
-                                   placeholder="Я ищу..."
-                                   onChange={(e) => searchItems(e.target.value)}
+                                   placeholder="Поискуйте по бренду..."
+                                   onChange={(e) => searchItems(e)}
                             />
+                            <i className={'fas fa-search search'}></i>
 
-                            {/*<div onClick={handleShow} className={isOpen ? "d-none" : "d-block"}>*/}
 
-                            {/*    <div><h1 className='ms-auto'>x</h1></div>*/}
 
-                            <div  className="filter"  >
+                            {inputValue && <div  className="filter"  >
 
 
 
 
                                 {
                                       filteredResults.map((items) => {
-
+                                        console.log(items)
                                         return(
                                             <div>
-                                                <h4>{items.categoryname}</h4>
-                                                <h4>{items.subcategoryname}</h4>
-                                                <h4>{items.subsubcategory}</h4>
-                                                <h4>{items.brand}</h4>
+                                                <h4>{items && items.productname}</h4>
+
                                             </div>
                                         )
-                                    } )
+                                    }  )
 
                                 }
-                            </div>
-                            {/*</div>*/}
+                            </div>}
+
                         </div>
                         <div className="second-left-side">
 

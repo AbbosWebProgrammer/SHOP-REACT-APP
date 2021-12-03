@@ -28,7 +28,7 @@ export const getBurgerId = (id, history) => {
             .then((res) => {
                 console.log(res.data)
                 dispatch(setBurger({menusId:res.data}));
-                    history.push("/categorypage")
+                    // history.push("/categorypage")
 
 
             })

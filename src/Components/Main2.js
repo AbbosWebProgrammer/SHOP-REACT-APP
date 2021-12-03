@@ -207,43 +207,43 @@ const Main2 = (props) => {
 
                     <Cards2/>
 
-                    <div className="texnika">
-                        <div><h1>С этими товарами ищут</h1></div>
-                        <div className="d-flex intexnika">
-                            <div className="smart ms-0">
-                                <p>смартфон</p>
-                            </div>
-                            <div className="smart">
-                                <p>смартфон xiaomi</p>
-                            </div>
-                            <div className="smart">
-                                <p>samsung a52</p>
-                            </div>
-                            <div className="smart">
-                                <p>айфон</p>
-                            </div>
-                            <div className="smart">
-                                <p>samsung galaxy s21</p>
-                            </div>
-                            <div className="smart">
-                                <p>смартфоны</p>
-                            </div>
-                            <div className="smart">
-                                <p>смартфон samsung</p>
-                            </div>
-                            <div className="smart">
-                                <p>iphone</p>
-                            </div>
-                            <div className="smart">
-                                <p>планшет</p>
-                            </div>
-                            <div className="smart">
-                                <p>ноутбук</p>
-                            </div>
+                    {/*<div className="texnika">*/}
+                    {/*    <div><h1>С этими товарами ищут</h1></div>*/}
+                    {/*    <div className="d-flex intexnika">*/}
+                    {/*        <div className="smart ms-0">*/}
+                    {/*            <p>смартфон</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>смартфон xiaomi</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>samsung a52</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>айфон</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>samsung galaxy s21</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>смартфоны</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>смартфон samsung</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>iphone</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>планшет</p>*/}
+                    {/*        </div>*/}
+                    {/*        <div className="smart">*/}
+                    {/*            <p>ноутбук</p>*/}
+                    {/*        </div>*/}
 
-                        </div>
+                    {/*    </div>*/}
 
-                    </div>
+                    {/*</div>*/}
 
                 </div>
             </div>

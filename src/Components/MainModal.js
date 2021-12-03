@@ -27,6 +27,11 @@ const ModalExample = (props) => {
     const [modal, setModal] = useState(false);
     const toggle = () => setModal(!modal);
 
+
+    const [modalin, setModalin] = useState(false);
+    const togglein = () => setModalin(!modalin);
+
+
     const onChange = (e, color) => {
         setColor(e.target.value);
         setCurrentColor(color);
@@ -162,6 +167,9 @@ const ModalExample = (props) => {
                                                 Добавить в корзину
                                             </button>
                                             <button className="fast-order">Быстрый заказ</button>
+                                            <Button  onClick={toggle}>
+                                               <h1>button</h1>
+                                            </Button>
                                         </div>
                                     </div>
                                 </div>

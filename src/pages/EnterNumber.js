@@ -5,6 +5,8 @@ import {connect} from "react-redux";
 import {enternumber} from "../redux/action/loginAction";
 import Navbar from "../Components/Nav";
 import Footer from "../Components/Footer";
+import { Link } from 'react-router-dom'
+
 
 
 const EnterNumber = (props) => {
@@ -22,17 +24,14 @@ const EnterNumber = (props) => {
                     <div className="card">
                         <div className="card-body">
                             <AvForm onSubmit={(event,errors,values) =>{ props.enternumber (event,errors,values,props.history)}}>
-                                <AvField type="text" name="phone" label="Your phone number" required errorMessage="To'ldirish majburiy" />
-
-
-
-                                <button type="submit" className="btn btn-success btn-block w-100 mt-3" >Sign in</button>
+                                <AvField type="text" name="phone" placeholder={'+998...'} maxlength={'13'} label="Your phone number" required errorMessage="To'ldirish majburiy" />
+                                <Link to={'/message'}>
+                                    <button type="submit" className="btn btn-success btn-block w-100 mt-3">Отправить</button>
+                                </Link>
                             </AvForm>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
 

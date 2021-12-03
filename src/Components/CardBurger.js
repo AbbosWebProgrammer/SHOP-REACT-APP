@@ -11,23 +11,11 @@ import axios from "axios";
 
 const CardBurger = (props) => {
 
-    console.log('proooops',props)
-
+// console.log('kere',props)
     useEffect(() => {
         props.getBurgerId();
     },[])
 
-    // const [data, setData] = useState([]);
-    //
-    // useEffect(() => {
-    //     axios
-    //         .get(API_PATH + "api/ProductsByCategoryId/" + `${props.id}`)
-    //         .then((res) => {
-    //             setData(res.data);
-    //             // console.log(res.data);
-    //         })
-    //         .catch((err) => console.log("Aka aylaning"));
-    // }, []);
 
 
     return (
@@ -35,7 +23,7 @@ const CardBurger = (props) => {
         <div className="row cards mt-5">
 
             {
-                props.menusId.data.map((data, index) => {
+                props.menusId.data && props.menusId.data.map((data, index) => {
                     if(props.menusId.data.length > 0)
                     return(
                         <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
@@ -59,11 +47,11 @@ const CardBurger = (props) => {
                                     <div>
                                         <div className="imgback">
                                             <img className='w-100' src={API_PATH + data.colors[0].image[0].image} alt=""/>
-                                            <span className='pink'>{data.discounts} % </span>
+                                            <span className='pink'>{data.colors[0].discount} % </span>
                                         </div>
                                         <div>
-                                            <h4 className='size'>{data.price} sum
-                                                <span className='old'>{data.oldprice} sum</span>
+                                            <h4 className='size'>{data.colors[0].price} sum
+                                                <span className='old'>{data.colors[0].oldprice} sum</span>
                                                 {/*<span className='pink'>{item.small}</span>*/}
                                             </h4>
                                             <div className="pword">
