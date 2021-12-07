@@ -20,6 +20,7 @@ import MainBurger from "./MainBurger";
 import Register from "../pages/Register";
 import MainFilter from "./MainFilter";
 import Verify from "../pages/Verify";
+import FilterCards from "./FilterCards";
 
 class MainRoot extends Component {
 
@@ -38,6 +39,7 @@ class MainRoot extends Component {
                         <Route path="/three" exact component={Back} />
                         <Route path={"/cards/:id"} exact component={Cards}/>
                         <Route path={"/cards2/:id2"} exact component={Cards2}/>
+                        <Route path={"/filt"} exact component={MainFilter}/>
 
                         <Route path={"/message"} exact component={Verify}/>
 
@@ -47,7 +49,7 @@ class MainRoot extends Component {
                         <Route path="/enter" exact component={EnterNumber} />
                         <Route path="/register" exact component={Register} />
 
-                        <Route path="/admin/menus" exact component={AdminMenus} />
+                        <Route path="/menus" exact component={AdminMenus} />
 
 
                     </Switch>

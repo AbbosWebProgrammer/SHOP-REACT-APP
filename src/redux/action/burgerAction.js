@@ -3,7 +3,7 @@ import axios from "axios";
 import {API_PATH} from "../../tools/constans";
 
 
-const jsonList=API_PATH +"api/ProductInfo/"
+// const jsonList=API_PATH +"api/ProductInfo/"
 
 export function setBurger(data) {
     return{
@@ -34,6 +34,20 @@ export const getBurgerId = (id, history) => {
             })
     }
 }
+
+
+
+
+export const onSubmit =  (input) =>  {
+    return async function  (dispatch,getState) {
+        await axios.get(API_PATH + 'api/SearchProducts/' + input)
+            .then((res) => {
+            dispatch(setBurger({filter: res.data}))
+        })
+    }
+}
+
+
 
 //
 // function search(jsonList, searchText) {

@@ -1,6 +1,7 @@
 import {SET_PARTS} from "../types/menusTypes";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
+import {setState} from "./cardsAction";
 
 
 
@@ -30,6 +31,18 @@ export const getPartsId = (id, history) => {
                history.push("/two")
            })
    }
+}
+
+
+
+export const getCardBack = (id ,history) => {
+    return function (dispatch,getState) {
+        axios.get(API_PATH + "/api/ProductInfo/" +id)
+            .then((res) => {
+                dispatch(setState({back:res.data.data}))
+                // history.push("/three")
+            })
+    }
 }
 
 

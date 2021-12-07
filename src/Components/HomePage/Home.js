@@ -16,6 +16,8 @@ import Wildberries from "../Wildberries";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
+import CardsMain2 from "./CardsMain2";
+import CardsMain3 from "./CardsMain3";
 
 
 
@@ -43,7 +45,7 @@ const Home = (props) => {
                     <div className="row">
 
                         {
-                            props.partsB.map((datas,index) => (
+                            props.partsB.splice(0,2).map((datas,index) => (
                                 <div className="parts  col-6 mt-4" key={index}>
                                 <div className="half" >
                                     <img onClick = {() => props.getPartsIdss(datas.brand, props.history)} src={datas.image} alt=""/>
@@ -56,9 +58,23 @@ const Home = (props) => {
 
                     </div>
 
-                    <CardsMain/>
+                    <CardsMain2/>
+                    <div className="row">
 
-                    <CardsMain/>
+                        {
+                            props.partsB.map((datasi,index) => (
+                                <div className="parts  col-6 mt-4" key={index}>
+                                    <div className="half" >
+                                        <img onClick = {() => props.getPartsIdss(datasi.brand, props.history)} src={datasi.image} alt=""/>
+
+                                    </div>
+                                </div>
+                            ))
+                        }
+
+
+                    </div>
+                    <CardsMain3/>
 
                     <Brends history={props.history}/>
 

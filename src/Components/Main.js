@@ -188,15 +188,15 @@ const Main = (props) => {
 
                     <div className="col-lg-12 col-md-12">
                         <div className="man">
-                            <div className='menu'><p>81 товар</p></div>
-                            <div className="menu">
-                                <p>Сортировать по:</p>
-                                <h6>Популярности</h6>
-                                <h6>Рейтингу</h6>
-                                <h6>Цене</h6>
-                                <h6>Скидке</h6>
-                                <h6> Обновлению</h6>
-                            </div>
+                            {/*<div className='menu'><p>81 товар</p></div>*/}
+                            {/*<div className="menu">*/}
+                            {/*    <p>Сортировать по:</p>*/}
+                            {/*    <h6>Популярности</h6>*/}
+                            {/*    <h6>Рейтингу</h6>*/}
+                            {/*    <h6>Цене</h6>*/}
+                            {/*    <h6>Скидке</h6>*/}
+                            {/*    <h6> Обновлению</h6>*/}
+                            {/*</div>*/}
 
 
 

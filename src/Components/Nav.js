@@ -1,19 +1,23 @@
 import React, {Component, useEffect, useState} from 'react';
 import Back from "./Back";
 import {Link} from "react-router-dom";
-import {UncontrolledCollapse, Button, CardBody, Card} from 'reactstrap';
+import {UncontrolledCollapse, Button, CardBody, Card, Modal} from 'reactstrap';
 import ModalExample from "./Data";
 import axios from "axios";
 import {API_PATH} from "../tools/constans";
 import {connect} from "react-redux";
-import {setBurger,getBurger,getBurgerId} from "../redux/action/burgerAction";
+import {setBurger,getBurger,getBurgerId,onSubmit} from "../redux/action/burgerAction";
 import CardBurger from "./CardBurger";
 import {Input} from "semantic-ui-react";
+import FilterCards from "./FilterCards";
+import data from "bootstrap/js/src/dom/data";
+import ModalBody from "reactstrap/es/ModalBody";
 
 const Navbar = (props) => {
 
     useEffect(() => {
         props.getBurger();
+
     },[])
 
 
@@ -46,6 +50,31 @@ const Navbar = (props) => {
         setFilteredResults(allBrands)
     }
 
+    const [formdata, setFormdata] = useState({
+        name: '',
+    })
+
+    // const onSubmit = async (e) => {
+    //     e.preventDefault()
+    //     try{
+    //         const data = await axios.get(API_PATH + 'api/SearchProducts/' + input)
+    //         console.log(data)
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
+
+    const [modalin, setModalin] = useState(false);
+    const togglein = () => setModalin(!modalin);
+
+
+
+    const [input, setInput] = useState('')
+
+    const inputHandler = e => {
+        setInput(e.target.value)
+    }
+    // {Headers:'Content-Type':'applicatio' + 'n/json'}
         return (
             <div className="nav-box">
 
@@ -88,6 +117,7 @@ const Navbar = (props) => {
                     </div>
 
                     <div className="second-div">
+                        <div className="all">
                         <div className="for-img-one">
                             <a href="#" id="toggler1">
                                 <img src="images/burg.png" alt=""/>
@@ -174,61 +204,118 @@ const Navbar = (props) => {
                                 <img src="https://alsafia.uz/img/logotip.png" alt=""/>
                             </Link>
                         </div>
+
+                            <div onClick={togglein} className="allinp d-flex align-items-center">
+                                <h2 className="fas fa-search text-white d-flex align-items-center"></h2>
+                                <Modal isOpen={modalin} toggle={togglein}>
+
+                                    <ModalBody className="for-inputt">
+                                <div className="for-input">
+                                    {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
+                                    <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
+                                    <Link to={'/filt'} className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
+
+                                    </Link>
+                                </div>
+                                    </ModalBody>
+                                </Modal>
+                            </div>
+
+                        </div>
+
                         <div className="for-input">
-                            <input type="text"
-                                   placeholder="Поискуйте по бренду..."
-                                   onChange={(e) => searchItems(e)}
-                            />
-                            <i className={'fas fa-search search'}></i>
-
-
-
-                            {inputValue && <div  className="filter"  >
+                            {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
+                            <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
+                            <Link to={'/filt'} className={'search fas fa-search'} onClick={(e) => props.onSubmit(input)}>
+                                Search...
+                            </Link>
+                            {/*<i onClick={e => onSubmit(e)} className={'fas fa-search search'}></i>*/}
 
 
 
 
-                                {
-                                      filteredResults.map((items) => {
-                                        console.log(items)
-                                        return(
-                                            <div>
-                                                <h4>{items && items.productname}</h4>
+                            {/*{inputValue && <div  className="filter"  >*/}
 
-                                            </div>
-                                        )
-                                    }  )
 
-                                }
-                            </div>}
+
+
+                            {/*    {*/}
+                            {/*          filteredResults.map((items) => {*/}
+                            {/*            console.log(items)*/}
+                            {/*            return(*/}
+
+                            {/*                <div>*/}
+                            {/*                    <h4 onClick={e => onSubmit(e,items)}>{items && items.productname}</h4>*/}
+
+                            {/*                </div>*/}
+
+                            {/*            )*/}
+                            {/*        }  )*/}
+
+                            {/*    }*/}
+                            {/*</div>}*/}
 
                         </div>
                         <div className="second-left-side">
+                            {localStorage.getItem("token") ? (
+                                <div className="d-flex">
+                                <div className="first-qism">
+                                    <a href="#">
+                                        <Link to={"/menus"} className="ras2">
+                                            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
+                                            <br />
+                                            <a href="#">Ползователь</a>
+                                        </Link>
+                                    </a>
 
-                            <div className="first-qism">
-                                <a href="#">
+                                </div>
 
-                                    <Link to={"/enter"} className="ras2">
 
-                                        <img
-                                            src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png"/>
-                                        <br/>
-                                        <a href="#">Войти</a>
-                                    </Link>
-                                </a>
+                                    <div className="first-qism">
+                                        <a href="#">
+                                            <Link to={"/korzina"} className="ras3">
+                                                <img src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png" />
+                                                <br />
+                                                <a href="#">Корзина</a>
+                                            </Link>
+                                        </a>
+                                    </div>
 
-                            </div>
-                            <div className="first-qism">
-                                <a href="#">
-                                    <Link to={"/korzina"} className="ras3">
+                                </div>
 
-                                        <img src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png"/>
-                                        <br/>
-                                        <a href="#">Корзина</a>
-                                    </Link>
-                                </a>
+                            ) : (
+                                <div className="d-flex">
+                                    <div className="first-qism">
+                                        <a href="#">
+                                            <Link to={"/login"} className="ras2">
+                                                <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
+                                                <br />
+                                                <a href="#">Войти</a>
+                                            </Link>
+                                        </a>
+                                    </div>
 
-                            </div>
+                                    <div className="first-qism">
+                                        <a href="#">
+                                            <Link to={"/enter"} className="ras2">
+                                                <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
+                                                <br />
+                                                <a href="#">Регистрация</a>
+                                            </Link>
+                                        </a>
+                                    </div>
+
+                                    <div className="first-qism">
+                                        <a href="#">
+                                            <Link to={"/korzina"} className="ras3">
+                                                <img src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png" />
+                                                <br />
+                                                <a href="#">Корзина</a>
+                                            </Link>
+                                        </a>
+                                    </div>
+                                </div>
+                            )}
                         </div>
                     </div>
                     <div className="oval"></div>
@@ -242,9 +329,9 @@ const mapStateToProps = (state) => {
     return{
         menus:state.burger.menus,
         menusId:state.burger.menusId,
-        show:state.burger.show,
+        show:state.burger.show
     }
 }
 
 
-export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId})(Navbar);
+export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId,onSubmit})(Navbar);

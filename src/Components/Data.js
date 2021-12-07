@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import axios from "axios";
 import { API_PATH } from "../tools/constans";
 import { v4 as uuidv4 } from "uuid";
+import {toast} from "react-toastify";
 
 const ModalExample = (props) => {
     const { buttonLabel = "Быстрый просмотр", className } = props;
@@ -57,7 +58,7 @@ const ModalExample = (props) => {
             let obj = JSON.parse(localStorage.getItem("basket"));
             data1.size = size;
             data1.uniqueid = uuidv4();
-            data1.currentColor = currentColor.color;
+            data1.currentColor = currentColor;
             data1.currentPrice = currentColor.price
             data1.currentOldprice = currentColor.oldprice
 
@@ -66,7 +67,7 @@ const ModalExample = (props) => {
         } else {
             data1.size = size;
             data1.uniqueid = uuidv4();
-            data1.currentColor = currentColor.color;
+            data1.currentColor = currentColor;
             data1.currentPrice = currentColor.price
             data1.currentOldprice = currentColor.oldprice
             localStorage.setItem("basket", JSON.stringify([data1]));
@@ -86,6 +87,9 @@ const ModalExample = (props) => {
     const [modalin, setModalin] = useState(false);
     const togglein = () => setModalin(!modalin);
 
+
+
+
     //fast-order-form
     const [formdata, setFormdata] = useState({
         data: {},
@@ -99,7 +103,10 @@ const ModalExample = (props) => {
             data: currentColor
         })
         try {
-           await axios.post('http://abboskakhkhorov.pythonanywhere.com/api/OrderAndOrderDetailsJson/', formdata, {Headers:{ 'Content-Type': 'application/json' }})
+           await axios.post(API_PATH + 'api/OrderAndOrderDetailsJson/', formdata, {Headers:{ 'Content-Type': 'applicatio' +
+                       'n/json' }})
+            toast("Ваш заказ оформлен!")
+
         } catch (e) {
             console.log(e)
         }
@@ -118,7 +125,7 @@ const ModalExample = (props) => {
         <div>
             <Button color="white" onClick={toggle}>
                 {buttonLabel}
-                {props.id}
+                <span style={{opacity: 0}}>{props.id}</span>
             </Button>
             <Modal isOpen={modal} toggle={toggle} className={className}>
                 <ModalBody>
@@ -215,19 +222,23 @@ const ModalExample = (props) => {
                                                     Перейти в корзину
                                                 </Link>
                                             ) : (
-                                                <span
+                                                <button
                                                     className="to-basket"
                                                     onClick={(e) => addBasket(e, data1)}
                                                 >
                           Добавить в корзину
-                        </span>
+                        </button>
                                             )}
 
                                             {/*<button >Быстрый заказ</button>*/}
                                             <Button className="fast-order" onClick={togglein}>
                                                 Быстрый заказ
                                             </Button>
+                                            <div>
+                                                <img className="w-100" src={API_PATH + data1.brandimage} alt=""/>
+                                            </div>
                                             <Modal isOpen={modalin} toggle={togglein} className={'fast-order-back'}>
+                                                <div className="btn-close ms-auto me-4 mt-4" onClick={togglein}></div>
                                                 <ModalBody className={'fast-order-mod'}>
                                                     <form className={'fast-order-form'} onSubmit={e => onSubmit(e)}>
                                                         <div className="field">
@@ -236,7 +247,7 @@ const ModalExample = (props) => {
                                                         </div>
                                                         <div className="field">
                                                             <label htmlFor="number">Номер для обратного звонка</label>
-                                                            <input value={formdata.phone} name={'phone'} onChange={e => onSubmitHandler(e)} type="number" placeholder={'Телефон номер...'} className={'input'}/>
+                                                            <input value={formdata.phone} name="phone" onChange={e => onSubmitHandler(e)} type="number" placeholder={'Телефон номер...'} className={'input'}/>
                                                         </div>
                                                         <div className="field">
                                                             <button type={'submit'} className={'button'}>Отправить</button>

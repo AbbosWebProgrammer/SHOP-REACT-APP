@@ -6,6 +6,7 @@ const initialState = {
     partscard:[],
     partsB:[],
     partscardB:[],
+    back:[],
     partsId:"",
 }
 

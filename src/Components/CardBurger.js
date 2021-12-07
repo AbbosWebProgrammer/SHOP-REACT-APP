@@ -4,6 +4,8 @@ import ModalExample from "./Data";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
 import {setBurger,getBurger,getBurgerId} from "../redux/action/burgerAction";
+import {inform,getCardBack} from "../redux/action/mainPartsAction";
+
 import {API_PATH} from "../tools/constans";
 import Back from "./Back";
 import axios from "axios";
@@ -26,14 +28,14 @@ const CardBurger = (props) => {
                 props.menusId.data && props.menusId.data.map((data, index) => {
                     if(props.menusId.data.length > 0)
                     return(
-                        <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
+                        <div className="text-decoration-none twocards col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-5 ">
                             <div  className='kategoriya'>
 
                                 <div>
                                     <div className="prosmotr">
                                         <ModalExample id={data.id}/>
                                     </div>
-                                    <Link to={"/three"}  className="out">
+                                    <Link to={"/three"}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
 
 
                                         <div className="foot">
@@ -61,7 +63,7 @@ const CardBurger = (props) => {
                                                 {/*        {item.abs}*/}
                                                 {/*    </div>*/}
                                             </div>
-                                            <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
+                                            {/*<div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>*/}
                                             {/*<div className="zed">gfd</div>*/}
                                         </div>
                                     </div>
@@ -90,4 +92,4 @@ const mapStateToProps = (state) => {
 }
 
 
-export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId})(CardBurger);
+export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId,inform,getCardBack})(CardBurger);

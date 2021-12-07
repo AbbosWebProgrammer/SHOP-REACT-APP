@@ -20,14 +20,6 @@ export function login(event, errors, values, history) {
     }
 }
 
-// export const getModal = () => (dispatch) => {
-//     axios.get(API_PATH + "api/ModalProductInfo/")
-//         .then((res) => {
-//             dispatch(updateState({subModals: res.data}))
-//         })
-// }
-
-
 export const getProducts = () => (dispatch) => {
     axios.get(API_PATH + "api/ProductsColorByProductId/")
         .then((res) => {
@@ -43,7 +35,7 @@ export function enternumber(event, errors, values, history) {
                 console.log(res);
                 localStorage.setItem(TOKEN_NAME,res.data.token);
                 dispatch({type: ""});
-                // history.push("/admin/menus");
+                 history.push("/message");
 
             })
             .catch((error) => {

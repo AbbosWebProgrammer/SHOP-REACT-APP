@@ -14,46 +14,48 @@ const AdminMenus = (props) => {
 
     return (
 
-        <div>
+        <div className={'cont'}>
+            <div className={'navb'}>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Главное
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Избранные
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Покупки
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Обрашение
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Отзывы и вопросы
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Финансы
+            </span>
+                <span className="item">
+              <i className="fas fa-home"></i>&nbsp; Профиль
+            </span>
+            </div>
+        <div className="navb">
 
-        <div className="navba">
-      <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Главное
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Избранные
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Покупки
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Обрашение
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Отзывы и вопросы
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Финансы
-      </span>
-            <span className="item">
-        <i className="fas fa-home"></i>&nbsp; Профиль
-      </span>
 
 
 
             <div className="section">
                 <div className="line line-1">
-                    <div className="card hover">
+                    <div className="card1 hover">
                         <div className="card-user">
                             <div className="img"></div>
-                            <h1 className="name">Doniyor</h1>
+                            <h1 className="name">Ползователь</h1>
                         </div>
                         <div className="card-content">
                             <p className="phone">Телефон:</p>
                             <p className="email">Email:</p>
                         </div>
                     </div>
-                    <div className="card hover">
+                    <div className="card1 hover">
                         <div className="card-user">
                             <div className="img"></div>
                             <h1 className="name">Доставки</h1>
@@ -62,7 +64,7 @@ const AdminMenus = (props) => {
                             <p className="phone">Телефон:</p>
                         </div>
                     </div>
-                    <div className="card hover">
+                    <div className="card1 hover">
                         <div className="card-user">
                             <div className="img"></div>
                             <h1 className="name">Скидка покупателя</h1>
@@ -96,9 +98,9 @@ const AdminMenus = (props) => {
                         <div className="info">
                             <div className="image"></div>
                             <div className="box">
-                                <button className="btn">История покупок</button>
-                                <button className="btn">История операций</button>
-                                <button className="btn">Электронные чеки</button>
+                                <button className="btn1">История покупок</button>
+                                <button className="btn1">История операций</button>
+                                <button className="btn1">Электронные чеки</button>
                             </div>
                         </div>
                     </div>

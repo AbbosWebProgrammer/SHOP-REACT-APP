@@ -6,196 +6,200 @@ import Back from "./Back";
 import Footer from "./Footer";
 import Cards from "./Cards";
 import {API_PATH} from "../tools/constans";
-import {getPartsId} from "../redux/action/mainPartsAction";
+
 import {connect} from "react-redux";
 import FilterCards from "./FilterCards";
+import Nav from "./Nav";
 
 
 const MainFilter = (props) => {
 
-    useEffect(() => {
-        props.getPartsId();
-    }, [])
+
 
 
     return (
 
+        <div>
+
+            <Nav/>
 
         <div className="row main me-0">
-            <div className="col-lg-3 d-lg-block d-sm-none">
-                <div className='leftpart'>
 
-                    <div className="aksiya">
-                        <p>Главная</p>
-                        <p>/ Акции /</p>
-                        <span>Акция Samsung</span>
-                    </div>
+            {/*<div className="col-lg-3 d-lg-block d-sm-none">*/}
+            {/*    <div className='leftpart'>*/}
 
-                    <div className='bigaksiya'><h1>Акция Samsung</h1></div>
-                    <div className="sam"><h5>Акция Samsung</h5></div>
+            {/*        <div className="aksiya">*/}
+            {/*            <p>Главная</p>*/}
+            {/*            <p>/ Акции /</p>*/}
+            {/*            <span>Акция Samsung</span>*/}
+            {/*        </div>*/}
 
-
-                    <div>
-                        <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>
-                            <h5>Категория</h5>
-                        </div>
-                        <UncontrolledCollapse className="dropdownmain" toggler="#toggler">
-                            <Card className="back">
-                                <CardBody className='p-0'>
-                                    <Form>
-                                        <FormGroup check inline>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>Пылесос (4)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox" checked="checked"/> <h6>Смартфон
-                                                (44)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>Телевизор (28)</h6>
-                                            </Label>
-                                        </FormGroup>
-
-                                    </Form>
-
-                                </CardBody>
-                            </Card>
-                        </UncontrolledCollapse>
-
-                        <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>
-                            <h5>Бренд</h5>
-                        </div>
-                        <UncontrolledCollapse className="dropdownmain" toggler="#toggler">
-                            <Card className="back">
-                                <CardBody className='p-0'>
-                                    <Form>
-                                        <FormGroup check inline>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>Samsung (73)</h6>
-                                            </Label>
-
-                                        </FormGroup>
-
-                                    </Form>
-
-                                </CardBody>
-                            </Card>
-                        </UncontrolledCollapse>
-
-                        <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>
-                            <h5>Цена, ₽</h5>
-                        </div>
-
-                        <UncontrolledCollapse className="dropdownmain" toggler="#toggler">
-                            <Card className="back">
-                                <CardBody className='p-0'>
-                                    <Form>
-                                        <FormGroup check inline className='d-flex ps-0'>
-                                            <Label check className="chek ">
-                                                <Input type="text" value='399891'/>
-
-                                            </Label>
-
-                                            <Label check className="chek">
-                                                <Input type="text" value='9847'/>
-
-                                            </Label>
-                                        </FormGroup>
+            {/*        <div className='bigaksiya'><h1>Акция Samsung</h1></div>*/}
+            {/*        <div className="sam"><h5>Акция Samsung</h5></div>*/}
 
 
-                                    </Form>
+            {/*        <div>*/}
+            {/*            <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>*/}
+            {/*                <h5>Категория</h5>*/}
+            {/*            </div>*/}
+            {/*            <UncontrolledCollapse className="dropdownmain" toggler="#toggler">*/}
+            {/*                <Card className="back">*/}
+            {/*                    <CardBody className='p-0'>*/}
+            {/*                        <Form>*/}
+            {/*                            <FormGroup check inline>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>Пылесос (4)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox" checked="checked"/> <h6>Смартфон*/}
+            {/*                                    (44)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>Телевизор (28)</h6>*/}
+            {/*                                </Label>*/}
+            {/*                            </FormGroup>*/}
 
-                                </CardBody>
-                            </Card>
-                        </UncontrolledCollapse>
+            {/*                        </Form>*/}
 
-                        <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>
-                            <h5>Скидка</h5>
-                        </div>
-                        <UncontrolledCollapse className="dropdownmain" toggler="#toggler">
-                            <Card className="back">
-                                <CardBody className='p-0'>
-                                    <Form>
-                                        <FormGroup check inline>
-                                            <Label check className="chek">
-                                                <Input type="radio"/> <h6>от 10% и выше</h6>
-                                            </Label>
+            {/*                    </CardBody>*/}
+            {/*                </Card>*/}
+            {/*            </UncontrolledCollapse>*/}
 
-                                        </FormGroup>
+            {/*            <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>*/}
+            {/*                <h5>Бренд</h5>*/}
+            {/*            </div>*/}
+            {/*            <UncontrolledCollapse className="dropdownmain" toggler="#toggler">*/}
+            {/*                <Card className="back">*/}
+            {/*                    <CardBody className='p-0'>*/}
+            {/*                        <Form>*/}
+            {/*                            <FormGroup check inline>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>Samsung (73)</h6>*/}
+            {/*                                </Label>*/}
 
-                                    </Form>
+            {/*                            </FormGroup>*/}
 
-                                </CardBody>
-                            </Card>
-                        </UncontrolledCollapse>
+            {/*                        </Form>*/}
 
+            {/*                    </CardBody>*/}
+            {/*                </Card>*/}
+            {/*            </UncontrolledCollapse>*/}
 
-                        <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>
-                            <h5>Разрешение экрана</h5>
-                        </div>
-                        <UncontrolledCollapse className="dropdownmain" toggler="#toggler">
-                            <Card className="over">
-                                <CardBody className='p-0'>
-                                    <Form>
-                                        <FormGroup check inline>
-                                            <Label check className="chek">
-                                                <Input type="checkbox" checked="checked"/> <h6>4K UHD
-                                                (3840x2160) (1)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>720*1600 (8)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>1366x768 (2)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>1600x720 (12)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>1920x1080 (1)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>2400x1080 (10)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>3200x1440 (6)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>3840 x 2160 (18)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>3840x2160 (3)</h6>
-                                            </Label><br/>
-                                            <Label check className="chek">
-                                                <Input type="checkbox"/> <h6>7680x4320 (2)</h6>
-                                            </Label>
+            {/*            <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>*/}
+            {/*                <h5>Цена, ₽</h5>*/}
+            {/*            </div>*/}
 
+            {/*            <UncontrolledCollapse className="dropdownmain" toggler="#toggler">*/}
+            {/*                <Card className="back">*/}
+            {/*                    <CardBody className='p-0'>*/}
+            {/*                        <Form>*/}
+            {/*                            <FormGroup check inline className='d-flex ps-0'>*/}
+            {/*                                <Label check className="chek ">*/}
+            {/*                                    <Input type="text" value='399891'/>*/}
 
-                                        </FormGroup>
+            {/*                                </Label>*/}
 
-                                    </Form>
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="text" value='9847'/>*/}
 
-                                </CardBody>
-                            </Card>
-                        </UncontrolledCollapse>
+            {/*                                </Label>*/}
+            {/*                            </FormGroup>*/}
 
 
-                    </div>
+            {/*                        </Form>*/}
+
+            {/*                    </CardBody>*/}
+            {/*                </Card>*/}
+            {/*            </UncontrolledCollapse>*/}
+
+            {/*            <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>*/}
+            {/*                <h5>Скидка</h5>*/}
+            {/*            </div>*/}
+            {/*            <UncontrolledCollapse className="dropdownmain" toggler="#toggler">*/}
+            {/*                <Card className="back">*/}
+            {/*                    <CardBody className='p-0'>*/}
+            {/*                        <Form>*/}
+            {/*                            <FormGroup check inline>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="radio"/> <h6>от 10% и выше</h6>*/}
+            {/*                                </Label>*/}
+
+            {/*                            </FormGroup>*/}
+
+            {/*                        </Form>*/}
+
+            {/*                    </CardBody>*/}
+            {/*                </Card>*/}
+            {/*            </UncontrolledCollapse>*/}
 
 
-                </div>
-            </div>
+            {/*            <div className="kategoriy" id="toggler" style={{marginBottom: '1rem'}}>*/}
+            {/*                <h5>Разрешение экрана</h5>*/}
+            {/*            </div>*/}
+            {/*            <UncontrolledCollapse className="dropdownmain" toggler="#toggler">*/}
+            {/*                <Card className="over">*/}
+            {/*                    <CardBody className='p-0'>*/}
+            {/*                        <Form>*/}
+            {/*                            <FormGroup check inline>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox" checked="checked"/> <h6>4K UHD*/}
+            {/*                                    (3840x2160) (1)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>720*1600 (8)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>1366x768 (2)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>1600x720 (12)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>1920x1080 (1)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>2400x1080 (10)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>3200x1440 (6)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>3840 x 2160 (18)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>3840x2160 (3)</h6>*/}
+            {/*                                </Label><br/>*/}
+            {/*                                <Label check className="chek">*/}
+            {/*                                    <Input type="checkbox"/> <h6>7680x4320 (2)</h6>*/}
+            {/*                                </Label>*/}
+
+
+            {/*                            </FormGroup>*/}
+
+            {/*                        </Form>*/}
+
+            {/*                    </CardBody>*/}
+            {/*                </Card>*/}
+            {/*            </UncontrolledCollapse>*/}
+
+
+            {/*        </div>*/}
+
+
+            {/*    </div>*/}
+            {/*</div>*/}
+
             <div className="col-lg-9 col-md-12">
                 <div className="man">
-                    <div className='menu'><p>81 товар</p></div>
-                    <div className="menu">
-                        <p>Сортировать по:</p>
-                        <h6>Популярности</h6>
-                        <h6>Рейтингу</h6>
-                        <h6>Цене</h6>
-                        <h6>Скидке</h6>
-                        <h6> Обновлению</h6>
-                    </div>
+                    {/*<div className='menu'><p>81 товар</p></div>*/}
+                    {/*<div className="menu">*/}
+                    {/*    <p>Сортировать по:</p>*/}
+                    {/*    <h6>Популярности</h6>*/}
+                    {/*    <h6>Рейтингу</h6>*/}
+                    {/*    <h6>Цене</h6>*/}
+                    {/*    <h6>Скидке</h6>*/}
+                    {/*    <h6> Обновлению</h6>*/}
+                    {/*</div>*/}
 
                     <FilterCards/>
 
@@ -241,6 +245,9 @@ const MainFilter = (props) => {
             </div>
         </div>
 
+            <Footer/>
+
+        </div>
     );
 }
 
@@ -250,4 +257,4 @@ const mapStateToProps = (state) => {
     }
 }
 
-export default connect(mapStateToProps, {getPartsId})(MainFilter);
+export default connect(mapStateToProps, null)(MainFilter);

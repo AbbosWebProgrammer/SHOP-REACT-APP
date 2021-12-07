@@ -13,7 +13,7 @@ const Brends = (props) => {
     },[])
 
         return (
-            <div>
+            <div className="populyarnoe">
 
                 <div className="d-flex">
                 <h1>Популярные бренды</h1>

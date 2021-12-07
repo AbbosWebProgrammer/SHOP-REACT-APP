@@ -2,24 +2,26 @@ import React, {Component, useEffect} from 'react';
 import ModalExample from "./Data";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {inform,getPartsId,getParts} from "../redux/action/mainPartsAction";
+import {setBurger,onSubmit} from "../redux/action/burgerAction";
+import {inform,getCardBack} from "../redux/action/mainPartsAction";
 import {API_PATH} from "../tools/constans";
 import Back from "./Back";
 
 
 const FilterCards = (props) => {
 
-    useEffect(() => {
-        props.getParts();
-        props.getPartsId();
-    },[])
+    // useEffect(() => {
+    //     props.onSubmit();
+    // }, [])
+
+    console.log('sub', props)
 
     return (
 
         <div
             className="row cards mt-5">
 
-            {props.partscard.data.map((data, index) => (
+            {props.filter.data && props.filter.data.map((data, index) => (
                 <div className="text-decoration-none twocards col-lg-3 col-md-3 col-sm-6 col-xs-6 mb-5 ">
                     <div  className='kategoriya'>
 
@@ -27,7 +29,7 @@ const FilterCards = (props) => {
                             <div className="prosmotr">
                                 <ModalExample id={data.id}/>
                             </div>
-                            <Link to={"/three"}  className="out">
+                            <Link to={"/three"} onClick={() => props.getCardBack(data.id , props.history) } className="out">
 
 
                                 <div className="foot">
@@ -55,7 +57,7 @@ const FilterCards = (props) => {
                                         {/*        {item.abs}*/}
                                         {/*    </div>*/}
                                     </div>
-                                    <div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>
+                                    {/*<div><span className='rassrochka'>РАССРОЧКА 0-0-24</span></div>*/}
                                     {/*<div className="zed">gfd</div>*/}
                                 </div>
                             </div>
@@ -77,11 +79,10 @@ const FilterCards = (props) => {
 const mapStateToProps = (state) => {
 
 
-    return{
-        parts:state.partM.parts,
-        partscard: state.partM.partscard
+    return {
+        filter:state.burger.filter
     }
 }
 
 
-export default connect(mapStateToProps,{inform,getPartsId,getParts})(FilterCards);
+export default connect(mapStateToProps, {setBurger,onSubmit,inform,getCardBack})(FilterCards);

@@ -7,7 +7,6 @@ import Navbar from "../Components/Nav";
 import Footer from "../Components/Footer";
 
 const EnterNumber = (props) => {
-    console.log(props)
 
 
     return (

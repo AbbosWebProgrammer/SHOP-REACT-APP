@@ -11,7 +11,7 @@ import Back from "../Back";
 
 
 
-const CardsMain = (props) => {
+const CardsMain2 = (props) => {
 
     useEffect(() => {
         props.getCard();
@@ -26,7 +26,7 @@ const CardsMain = (props) => {
 
 
                 {
-                    props.cards &&  props.cards.splice(0,12).map((data,index) => (
+                    props.cards &&  props.cards.splice(13,24).map((data,index) => (
 
                         <div  className="incards text-decoration-none" key={index}>
 
@@ -86,4 +86,4 @@ const mapStateToProps = (state) => {
     }
 };
 
-export default connect(mapStateToProps, {setState, getCard,getCardBack})(CardsMain);
+export default connect(mapStateToProps, {setState, getCard,getCardBack})(CardsMain2);

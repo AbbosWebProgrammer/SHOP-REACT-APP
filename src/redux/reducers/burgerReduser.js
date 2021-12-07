@@ -5,7 +5,8 @@ const initialState = {
     menus:[],
     show:false,
     menusId:[],
-    search:[]
+    search:[],
+    filter:[]
 }
 
 export const burgerReduser = (state = initialState,action) => {

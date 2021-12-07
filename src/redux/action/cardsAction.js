@@ -1,6 +1,7 @@
 import {CARDS_INFO, SET_STATE} from "../types/menusTypes";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
+import {inform} from "./mainPartsAction";
 
 export function setState (data) {
     return {
@@ -25,20 +26,6 @@ export  const getCard = () => (dispatch,getState) => {
 }
 
 
-export  const getCardIn = () => (dispatch,getState) => {
-
-    // + getCard().cardsR.getCardsId
-
-    axios.get(API_PATH + "api/ProductInfo/" + getState().cardsR.getCardsId)
-        .then((res) => {
-
-            dispatch(setState({cardsIn:res.data.data}))
-        })
-
-}
-
-
-
 export  const getCardColor = () => (dispatch) => {
 
 
@@ -51,10 +38,33 @@ export  const getCardColor = () => (dispatch) => {
 
 export const getCardBack = (id ,history) => {
    return function (dispatch,getState) {
-       axios.get(API_PATH + "/api/ProductInfo/" +id)
+       axios.get(API_PATH + "/api/ProductAllInfo/" +id)
            .then((res) => {
                dispatch(setState({back:res.data.data}))
                // history.push("/three")
            })
    }
+}
+
+
+
+
+export const getParts = () =>  (dispatch,getState) => {
+    axios.get(API_PATH +"api/MainPagePromoForHomePage/" )
+        .then((res) => {
+            dispatch(inform({parts:res.data}))
+        })
+}
+
+
+export const getPartsId = (id, history) => {
+
+    return function(dispatch, getState) {
+        axios.get(API_PATH +"api/MainPagePromoForHomePageProducts/" + id )
+
+            .then((res) => {
+                dispatch(inform({partscard:res.data}))
+                history.push("/two")
+            })
+    }
 }

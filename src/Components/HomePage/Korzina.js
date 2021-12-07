@@ -1,27 +1,51 @@
 import React, { useState, useEffect } from "react";
 import Navbar from "../Nav";
 import Footer from "../Footer";
-import { Link } from "react-router-dom";
 import { API_PATH } from "../../tools/constans";
+import axios from "axios";
+import {toast} from "react-toastify";
 
 const Korzina = () => {
     let [bool, setBool] = useState(true);
     let [orders, setOrders] = useState(null);
     let [currentNum, setCurrentNum] = useState("");
 
-    const plusone = (value) => {
-        return value + 1;
+    const [form, setForm] = useState({
+        name: "",
+        surname: "",
+        phone: "",
+        address: "",
+    });
+
+    const onChange = (e) => {
+        setForm({
+            ...form,
+            [e.target.name]: e.target.value,
+        });
     };
 
-    const minusone = (value) => {
-        if (value < 3) {
-            return value;
-        } else {
-            return value - 1;
+    const onSubmit = async (e) => {
+        e.preventDefault();
+
+        const data = {
+            ...form,
+            data: JSON.parse(localStorage.getItem("basket")),
+        };
+
+        try {
+            const res = await axios.post(
+                "http://abboskakhkhorov.pythonanywhere.com/api/OrderJson/",
+                { data },
+                { headers: { "Content-Type": "application/json" } }
+            );
+            console.log(res);
+            toast("Ваши закупки отправлены")
+        } catch (err) {
+            console.log(err);
         }
-    };
 
-    console.log(orders)
+        // console.log(data);
+    };
 
     const inc = (e, order, q) => {
         let quantity = q;
@@ -58,12 +82,6 @@ const Korzina = () => {
         setOrders(parsedOrders);
     }, [bool, currentNum]);
 
-    // const foo = (data, key) => {
-    //   return [...new Map(data.map((x) => [key(x), x])).values()];
-    // };
-
-    // let uniqueOrders = orders && foo(orders, (it) => it.id);
-
     const onDelete = (e, id) => {
         const filtered = orders.filter((order) => order.uniqueid !== id);
         localStorage.setItem("basket", JSON.stringify(filtered));
@@ -73,7 +91,9 @@ const Korzina = () => {
     const summ = (chosenOrders) => {
         const summ =
             chosenOrders &&
-            chosenOrders.map((order) => 1 * order.currentPrice * 1 * order.buy_quantity);
+            chosenOrders.map(
+                (order) => order.currentColor.price ?  1 * order.currentColor.price * 1 * order.buy_quantity : 1 * order.colors[0].price * 1 * order.buy_quantity
+            );
 
         let finalSumm = 0;
 
@@ -86,7 +106,9 @@ const Korzina = () => {
     const summDel = (chosenOrders) => {
         const summ =
             chosenOrders &&
-            chosenOrders.map((order) => 1 * order.currentOldprice * 1 * order.buy_quantity);
+            chosenOrders.map(
+                (order) => order.currentColor.price ?  1 * order.currentColor.oldprice * 1 * order.buy_quantity : 1 * order.colors[0].oldprice * 1 * order.buy_quantity
+            );
 
         let finalSumm = 0;
 
@@ -115,16 +137,18 @@ const Korzina = () => {
                             {orders &&
                             orders.map((order) => (
                                 <div className="orders-list-item">
-                                    <div className="d-flex">
-                                    <div className="order-image">
-                                        <img src={API_PATH + order.colors[0].image[0].image} />
-                                    </div>
-                                    <div className="order-content">
-                                        <span>{order.productname}</span>
-                                        <span>Цветь: {order.currentColor}</span>
-                                        <span>Размер: {order.size && order.size.ordersize}</span>
-                                        <span>Бренд: {order.brand}</span>
-                                    </div>
+                                    <div className="d-flex w-50">
+                                        <div className="order-image">
+                                            <img src={API_PATH + order.colors[0].image[0].image} />
+                                        </div>
+                                        <div className="order-content">
+                                            <span>{order.productname}</span>
+                                            <span> {order.currentColor.color ? `Цветь: ${order.currentColor.color}` : ""}</span>
+                                            <span>
+                          Размер: {order.size && order.size.ordersize}
+                        </span>
+                                            <span>Бренд: {order.brand}</span>
+                                        </div>
                                     </div>
                                     <div className="order-inc-dec">
                                         <button
@@ -143,8 +167,12 @@ const Korzina = () => {
                                         </button>
                                     </div>
                                     <div className="order-price">
-                                        <h3>{ 1 * order.buy_quantity * 1 * order.currentPrice} сум</h3>
-                                        <del>{1 * order.buy_quantity * 1 * order.currentOldprice} сум</del>
+                                        <h3>
+                                            {order.currentColor.price ? 1 * order.buy_quantity * 1 * order.currentColor.price : order.colors[0].price} сум
+                                        </h3>
+                                        <del>
+                                            {order.currentColor.oldprice ? 1 * order.buy_quantity * 1 * order.currentColor.oldprice : order.colors[0].oldprice} сум
+                                        </del>
                                     </div>
                                     <div className="order-delete">
                                         <i
@@ -179,6 +207,8 @@ const Korzina = () => {
                                             type="text"
                                             id="name"
                                             name="name"
+                                            onChange={(e) => onChange(e)}
+                                            value={form.name}
                                             className="form-field-input input"
                                         />
                                     </div>
@@ -190,30 +220,36 @@ const Korzina = () => {
                                             type="text"
                                             id="surname"
                                             name="surname"
+                                            onChange={(e) => onChange(e)}
+                                            value={form.surname}
                                             className="form-field-input input"
                                         />
                                     </div>
                                 </div>
                                 <div className="form-field">
-                                    <label htmlFor="tel" className="form-field-name">
+                                    <label htmlFor="phone" className="form-field-name">
                                         Контактный телефон
                                     </label>
                                     <input
                                         type="number"
-                                        id="tel"
-                                        name="tel"
+                                        id="phone"
+                                        name="phone"
+                                        onChange={(e) => onChange(e)}
+                                        value={form.phone}
                                         className="form-field-input input"
                                     />
                                 </div>
 
                                 <div className="form-field">
                                     <label htmlFor="email" className="form-field-name">
-                                        Электронная почта
+                                        Адресс
                                     </label>
                                     <input
-                                        type="email"
-                                        id="email"
-                                        name="email"
+                                        type="text"
+                                        id="address"
+                                        onChange={(e) => onChange(e)}
+                                        value={form.address}
+                                        name="address"
                                         className="form-field-input input"
                                     />
                                 </div>
@@ -240,7 +276,9 @@ const Korzina = () => {
               </span>
                         </div>
 
-                        <button className="button">ЗАКАЗАТЬ</button>
+                        <button onClick={(e) => onSubmit(e)} className="button">
+                            ЗАКАЗАТЬ
+                        </button>
                     </div>
                 </div>
             </div>
