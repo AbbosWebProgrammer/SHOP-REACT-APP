@@ -17,7 +17,7 @@ const Cards = (props) => {
     return (
 
         <div
-        className="row cards">
+        className="row cards mt-5">
 
             {props.partscard.data &&  props.partscard.data.map((data, index) => (
                 // col-lg-3 col-md-3 col-sm-6 col-xs-6

@@ -129,14 +129,12 @@ const Back = (props) => {
                                 {/*<div className="btn-close" onClick={toggle}></div>*/}
                                 <h1 key={data1.id}>{data1.productname}</h1>
                                 <div className="d-flex">
-                                    <p>Артикул:</p>
-                                    <p className="ms-1">35789469</p>
-                                    <p className="ms-3">star</p>
-                                    <p>&nbsp;1 отзыв</p>
+                                   
                                     <p className="ms-3">Купили более {data1.buy_quantity} раз</p>
                                 </div>
                             </div>
                             <form className="artikul-body">
+
                                 <div className="column-1">
                                     <div className="column-1-container">
                                         {(currentColor.image
@@ -161,11 +159,12 @@ const Back = (props) => {
                                         />
                                     </div>
                                 </div>
+
                                 <div className="column-3">
                                     <div className="column-3-header">
-                    <span className="d-flex">
-                      <h1>{data1.colors[0].price} сумм</h1>&nbsp;
-                        <del>{data1.colors[0].oldprice} сумм</del>
+                    <span className="d-flex prc">
+                      <h1>{data1.colors[0].price} сум</h1>&nbsp;
+                        <del>{data1.colors[0].oldprice} сум</del>
                     </span>
                                         <h5>Цвет:{color ? color : data1.colors[0].color}</h5>
                                         <div className="colors">

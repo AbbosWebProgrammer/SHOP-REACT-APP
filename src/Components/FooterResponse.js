@@ -19,10 +19,10 @@ const Accordion = ({ title, children }) => {
 };
 export const App = () => (
     <div className="col-12 resmedia">
-        <Accordion title="Why is">
+        <Accordion title="Телефон ">
             <ul>
 
-                    <img className='w-50 mt-2 mb-2' src="https://alsafia.uz/img/logotip.png" alt=""/>
+                    <img className='w-50 mt-2 mb-2' src="images/logotip.png" alt=""/>
 
                 <li>
                     <h2>Телефон поддержки</h2>
@@ -33,7 +33,7 @@ export const App = () => (
 
             </ul>
         </Accordion>
-        <Accordion title="What's It ?">
+        <Accordion title="Наши проекты">
             <ul>
 
 
@@ -42,7 +42,7 @@ export const App = () => (
 
             </ul>
         </Accordion>
-        <Accordion title="What Is">
+        <Accordion title="поддержки">
             <ul className="click">
                 <li>
                     <img src="https://olcha.uz/_nuxt/img/apelsin.93106ae.png" alt=""/>

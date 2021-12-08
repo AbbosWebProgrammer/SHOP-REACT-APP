@@ -135,10 +135,10 @@ const ModalExample = (props) => {
                                 <div className="btn-close" onClick={toggle}></div>
                                 <h1 key={data1.id}>{data1.productname}</h1>
                                 <div className="d-flex">
-                                    <p>Артикул:</p>
-                                    <p className="ms-1">35789469</p>
-                                    <p className="ms-3">star</p>
-                                    <p>&nbsp;1 отзыв</p>
+                                    {/*<p>Артикул:</p>*/}
+                                    {/*<p className="ms-1">35789469</p>*/}
+                                    {/*<p className="ms-3">star</p>*/}
+                                    {/*<p>&nbsp;1 отзыв</p>*/}
                                     <p className="ms-3">Купили более {data1.buy_quantity} раз</p>
                                 </div>
                             </div>

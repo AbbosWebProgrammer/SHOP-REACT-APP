@@ -8,6 +8,8 @@ import Footer from "../Components/Footer";
 import "./register.scss";
 import { Redirect, useHistory } from "react-router-dom";
 import {toast} from "react-toastify";
+import {Link} from "react-router-dom";
+
 
 const EnterNumber = (props) => {
     const history = useHistory();
@@ -92,7 +94,7 @@ const EnterNumber = (props) => {
             <Navbar />
 
             <div className="container">
-                <div className="row vh-100 justify-content-center align-items-center">
+                <div className="row  justify-content-center align-items-center">
                     <div className="col-lg-4 col-sm-8 col-md-6">
                         <div className="card">
                             <div className="card-body">
@@ -169,6 +171,12 @@ const EnterNumber = (props) => {
                         </div>
                     </div>
                 </div>
+                <div className="row mt-5 mb-5">
+                    <Link to="/login">
+                    <button className="bg-danger btn text-white col-4 offset-4 mb-5 ">Войти</button>
+                    </Link>
+                </div>
+
             </div>
 
             <Footer />

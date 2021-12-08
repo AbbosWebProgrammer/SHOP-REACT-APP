@@ -19,7 +19,7 @@ class Footer extends Component {
                         <div className="link-one w-25">
                             <ul>
                                 <li>
-                                    <img className='w-50' src="https://alsafia.uz/img/logotip.png" alt=""/>
+                                    <img className='w-50' src="images/logotip.png" alt=""/>
 
                                 </li>
                                 <li>

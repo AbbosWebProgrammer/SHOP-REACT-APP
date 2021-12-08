@@ -57,7 +57,7 @@ const CardsMain = (props) => {
                                                 </h4>
 
                                                 <div className="pword">
-                                                    <p className='pwordp w-auto'>{data.brand}/ {data.product}</p>
+                                                    <p className='pwordp w-auto'>{data.brand}/ {data.productname}</p>
 
                                                 </div>
 

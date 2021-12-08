@@ -134,8 +134,10 @@ const Navbar = (props) => {
                                                     {/*{`name-tabler d-flex ${props.show? "show" : ""}`} onMouseEnter={() => props.setBurger({show: ! props.show})}*/}
                                                     <div className="name-tabler">
                                                     <Link to={"/categorypage"} onClick={() => props.getBurgerId(item.id,props.history)} className="name-table d-flex" >
+
                                                         <img className='user me-2' src={item.image} alt=""/>
                                                         <h4>{item.categoryname}</h4>
+
                                                     </Link>
 
 
@@ -195,13 +197,13 @@ const Navbar = (props) => {
 
 
 
-                                <div className="close" id="toggler1" >X</div>
+                                <div className="btn-close mt-3 me-3" id="toggler1" ></div>
                             </UncontrolledCollapse>
 
                         </div>
                         <div className="logo-img">
                             <Link to={"/"}>
-                                <img src="https://alsafia.uz/img/logotip.png" alt=""/>
+                                <img src="images/logotip.png" alt=""/>
                             </Link>
                         </div>
 
@@ -213,8 +215,8 @@ const Navbar = (props) => {
                                 <div className="for-input">
                                     {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
                                     <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
-                                    <Link to={'/filt'} className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
-
+                                    <Link to={'/filt'}  className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
+                                        <div onClick={togglein}></div>
                                     </Link>
                                 </div>
                                     </ModalBody>
@@ -285,15 +287,15 @@ const Navbar = (props) => {
 
                             ) : (
                                 <div className="d-flex">
-                                    <div className="first-qism">
-                                        <a href="#">
-                                            <Link to={"/login"} className="ras2">
-                                                <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
-                                                <br />
-                                                <a href="#">Войти</a>
-                                            </Link>
-                                        </a>
-                                    </div>
+                                    {/*<div className="first-qism">*/}
+                                    {/*    <a href="#">*/}
+                                    {/*        <Link to={"/login"} className="ras2">*/}
+                                    {/*            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />*/}
+                                    {/*            <br />*/}
+                                    {/*            <a href="#">Войти</a>*/}
+                                    {/*        </Link>*/}
+                                    {/*    </a>*/}
+                                    {/*</div>*/}
 
                                     <div className="first-qism">
                                         <a href="#">

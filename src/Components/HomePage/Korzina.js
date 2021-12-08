@@ -34,7 +34,7 @@ const Korzina = () => {
 
         try {
             const res = await axios.post(
-                "http://abboskakhkhorov.pythonanywhere.com/api/OrderJson/",
+                API_PATH + "api/OrderJson/",
                 { data },
                 { headers: { "Content-Type": "application/json" } }
             );
