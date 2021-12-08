@@ -93,9 +93,9 @@ const EnterNumber = (props) => {
         <div>
             <Navbar />
 
-            <div className="container">
-                <div className="row  justify-content-center align-items-center">
-                    <div className="col-lg-4 col-sm-8 col-md-6">
+            <div className="container mt-5">
+                <div className="row  justify-content-center align-items-center mt-5">
+                    <div className="col-lg-4 col-sm-8 col-md-6 mt-5">
                         <div className="card">
                             <div className="card-body">
                                 <form className="form-data p-2">

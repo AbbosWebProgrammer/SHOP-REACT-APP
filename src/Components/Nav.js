@@ -302,7 +302,7 @@ const Navbar = (props) => {
                                             <Link to={"/enter"} className="ras2">
                                                 <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
                                                 <br />
-                                                <a href="#">Регистрация</a>
+                                                <a href="#">Ползователь</a>
                                             </Link>
                                         </a>
                                     </div>

@@ -50,9 +50,9 @@ const Login = (props) => {
 
             <Nav/>
 
-        <div className="container log">
-            <div className="row justify-content-center align-items-center">
-                <div className="col-lg-4 col-sm-8 col-md-6">
+        <div className="container log mt-5">
+            <div className="row justify-content-center align-items-center mt-5">
+                <div className="col-lg-4 col-sm-8 col-md-6 mt-5">
                     <div className="card">
                         <div className="card-body">
                             <AvForm
@@ -94,7 +94,7 @@ const Login = (props) => {
             </div>
             <div className="row mt-5 mb-5">
                 <Link to={"/enter"}>
-                    <button className="bg-danger btn text-white col-4 offset-4 mb-5 ">Регистрация</button>
+                    <button className="bg-danger btn text-white col-4 offset-4 mb-5 ">Ползователь</button>
                 </Link>
             </div>
         </div>
