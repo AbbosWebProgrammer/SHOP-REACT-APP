@@ -16,8 +16,8 @@ import Wildberries from "../Wildberries";
 import {Link} from "react-router-dom";
 import axios from "axios";
 import {API_PATH} from "../../tools/constans";
-import CardsMain2 from "./CardsMain2";
-import CardsMain3 from "./CardsMain3";
+
+
 
 
 
@@ -58,7 +58,7 @@ const Home = (props) => {
 
                     </div>
 
-                    <CardsMain2/>
+                    <CardsMain/>
                     <div className="row">
 
                         {
@@ -74,7 +74,7 @@ const Home = (props) => {
 
 
                     </div>
-                    <CardsMain3/>
+                    <CardsMain/>
 
                     <Brends history={props.history}/>
 

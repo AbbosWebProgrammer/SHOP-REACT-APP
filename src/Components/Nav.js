@@ -229,7 +229,7 @@ const Navbar = (props) => {
                             {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
                             <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
                             <Link to={'/filt'} className={'search fas fa-search'} onClick={(e) => props.onSubmit(input)}>
-                                Search...
+
                             </Link>
                             {/*<i onClick={e => onSubmit(e)} className={'fas fa-search search'}></i>*/}
 

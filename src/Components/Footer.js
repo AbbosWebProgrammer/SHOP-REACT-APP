@@ -32,22 +32,28 @@ class Footer extends Component {
                             </ul>
 
                         </div>
-                        <div className="link-two">
+                        <div className="link-two d-flex">
                             <ul>
 
                                 <li>
                                     <img
-                                        src="https://cdn-icons.flaticon.com/png/128/2504/premium/2504903.png?token=exp=1638704285~hmac=83981f5cd559c69ab9109b444daa9435"
+                                        src="https://img.icons8.com/fluency/96/000000/facebook.png"
                                         alt=""/>
                                     <h2>Facebook</h2>
                                 </li>
                                 <li>
-                                    <img src="https://cdn-icons-png.flaticon.com/128/2111/2111463.png" alt=""/>
+                                    <img src="https://img.icons8.com/fluency/48/000000/instagram-new.png" alt=""/>
                                 <h2>Instagram</h2>
                                 </li>
+                            </ul>
+                            <ul>
                                 <li>
-                                    <img src="https://cdn-icons.flaticon.com/png/128/3536/premium/3536661.png?token=exp=1638704824~hmac=ebfdf2be2a18703f6a6a2cd7fc82979b" alt=""/>
+                                    <img src="https://img.icons8.com/color/48/000000/telegram-app--v1.png" alt=""/>
                                     <h2>Telegram</h2>
+                                </li>
+                                <li>
+                                    <img src="https://img.icons8.com/color/48/000000/youtube-play.png" alt=""/>
+                                    <h2>You tube</h2>
                                 </li>
                             </ul>
                         </div>

@@ -385,7 +385,7 @@
           text-decoration: none;
           img{
             width: 180px;
-            height: 100%;
+            //height: 100%;
             margin-top: -20px;
             @media (max-width: 500px) {
               width: 130px;
@@ -433,9 +433,9 @@
           transition: 0.3s all;
         }
 
-        i:hover {
-          color: #fff;
-        }
+        //i:hover {
+        //  color: #fff;
+        //}
 
         i:active {
           transform: scale(0.95);
@@ -447,7 +447,7 @@
           top: 60%;
           transform: translateY(-50%);
           right: 20px;
-          color: rgb(133, 133, 133);
+          color: #ffffffba;
 
           &:hover {
             background-color: transparent;
@@ -1386,11 +1386,10 @@ padding:0 20px 20px 20px;
 
 
  .footer{
-   position: relative;
+  position: relative;
 margin-top: 35px;
-   background-color: #481173;
+   background: linear-gradient(to right, #9511cb 0, #561173 100%) no-repeat;
    padding: 80px 40px 50px 20px;
-
    .media{
      @media (max-width: 900px){
        display: none;
@@ -1640,7 +1639,7 @@ padding-top: 35px;
            margin-top: 20px;
            cursor: pointer;
            img{
-             width: 15%;
+             width: 50px;
              height: 15%;
              margin-right: 15px;
            }
@@ -1659,9 +1658,9 @@ padding-top: 35px;
          }
        }
      }
-     .link-two ul:nth-child(2){
-       margin-top: 45px;
-     }
+     //.link-two ul:nth-child(2){
+     //  margin-top: 45px;
+     //}
      .link-three{
        ul{
          li:first-child{
@@ -2500,7 +2499,7 @@ padding-top: 35px;
     top: 60%;
     transform: translateY(-50%);
     right: 20px;
-    color: rgb(133, 133, 133);
+    color: #ffffffba;
 
     &:hover {
       background-color: transparent;
