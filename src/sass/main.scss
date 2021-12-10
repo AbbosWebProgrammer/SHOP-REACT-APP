@@ -9,7 +9,7 @@
   left: 0;
   top: 0;
   transition: left .3s ease 0s;
-  background-color: white;
+
 
   display: flex;
 
@@ -22,7 +22,7 @@
     overflow-y: auto;
     height: 800px;
     display: flex;
-
+    background-color: white;
 
     .name{
 
@@ -358,6 +358,16 @@
         width: 50px;
         height: 50px;
         margin-top: 7px;
+        .kris{
+          position: absolute;
+          left: 270px;
+          color: white;
+        }
+        .lor{
+        width: 430vh;
+          height: 100vh;
+          background-color: transparent;
+        }
         @media (max-width: 600px) {
           width: 40px;
           height: 40px;

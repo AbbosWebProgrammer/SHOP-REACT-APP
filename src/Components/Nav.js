@@ -6,7 +6,7 @@ import ModalExample from "./Data";
 import axios from "axios";
 import {API_PATH} from "../tools/constans";
 import {connect} from "react-redux";
-import {setBurger,getBurger,getBurgerId,onSubmit} from "../redux/action/burgerAction";
+import {setBurger, getBurger, getBurgerId, onSubmit} from "../redux/action/burgerAction";
 import CardBurger from "./CardBurger";
 import {Input} from "semantic-ui-react";
 import FilterCards from "./FilterCards";
@@ -18,7 +18,7 @@ const Navbar = (props) => {
     useEffect(() => {
         props.getBurger();
 
-    },[])
+    }, [])
 
 
     const [APIData, setAPIData] = useState([])
@@ -68,56 +68,54 @@ const Navbar = (props) => {
     const togglein = () => setModalin(!modalin);
 
 
-
     const [input, setInput] = useState('')
 
     const inputHandler = e => {
         setInput(e.target.value)
     }
     // {Headers:'Content-Type':'applicatio' + 'n/json'}
-        return (
-            <div className="nav-box">
+    return (
+        <div className="nav-box">
 
 
+            <div className="navbar">
 
-                <div className="navbar">
+                <div className="first-div d-flex justify-content-between w-100 ">
 
-                    <div className="first-div d-flex justify-content-between w-100 ">
+                    <ul>
+                        <li>
+                            <a href='#'>Ru</a>
+                            <img className='ms-1' src="images/img-bayroq-rus.svg" alt=""/>
+                        </li>
 
-                        <ul>
-                            <li>
-                                <a href='#'>Ru</a>
-                                <img className='ms-1' src="images/img-bayroq-rus.svg" alt=""/>
-                            </li>
+                        <li>
 
-                            <li>
+                            <a href="#">
+                                Бесплатная доставка
+                            </a>
+                        </li>
+                        {/*<li>*/}
+                        {/*    <a className="navbar-one-button" href="#">*/}
+                        {/*        Продавайте на Alsafia*/}
+                        {/*    </a>*/}
+                        {/*</li>*/}
+                        <li>
+                            <a className="navbar-one-button" href="https://alsafia-cpa.uz/">
+                                Стать партнёром Alsafia
+                            </a>
+                        </li>
+                    </ul>
+                    <ul className="d-flex justify-content-end  ">
+                        <li>
+                            <a className="navbar-two-button" href="https://t.me/Manager_saisolo/">
+                                Сообщить о проблеме
+                            </a>
+                        </li>
+                    </ul>
+                </div>
 
-                                <a href="#">
-                                    Бесплатная доставка
-                                </a>
-                            </li>
-                            {/*<li>*/}
-                            {/*    <a className="navbar-one-button" href="#">*/}
-                            {/*        Продавайте на Alsafia*/}
-                            {/*    </a>*/}
-                            {/*</li>*/}
-                            <li>
-                                <a className="navbar-one-button" href="https://alsafia-cpa.uz/">
-                                    Стать партнёром Alsafia
-                                </a>
-                            </li>
-                        </ul>
-                        <ul className="d-flex justify-content-end  ">
-                            <li>
-                                <a className="navbar-two-button" href="https://t.me/Manager_saisolo/">
-                                    Сообщить о проблеме
-                                </a>
-                            </li>
-                        </ul>
-                    </div>
-
-                    <div className="second-div">
-                        <div className="all">
+                <div className="second-div">
+                    <div className="all">
                         <div className="for-img-one">
                             <a href="#" id="toggler1">
                                 <img src="images/burg.png" alt=""/>
@@ -133,56 +131,63 @@ const Navbar = (props) => {
                                                 <div key={index} className='name mt-4'>
                                                     {/*{`name-tabler d-flex ${props.show? "show" : ""}`} onMouseEnter={() => props.setBurger({show: ! props.show})}*/}
                                                     <div className="name-tabler">
-                                                    <Link to={"/categorypage"} onClick={() => props.getBurgerId(item.id,props.history)} className="name-table d-flex" >
+                                                        <Link to={"/categorypage"}
+                                                              onClick={() => props.getBurgerId(item.id, props.history)}
+                                                              className="name-table d-flex">
 
-                                                        <img className='user me-2' src={item.image} alt=""/>
-                                                        <h4>{item.categoryname}</h4>
+                                                            <img className='user me-2' src={item.image} alt=""/>
+                                                            <h4>{item.categoryname}</h4>
 
-                                                    </Link>
+                                                        </Link>
 
 
+                                                        <div className="right-part d-none">
+                                                            <div className="inside">
+                                                                <div className="row">
 
-                                                    <div className="right-part d-none" >
-                                                        <div className="inside">
-                                                      <div className="row">
+                                                                    {
+                                                                        item.subcategories.map((item1) => {
+                                                                                if (item.subcategories.length > 0) {
+                                                                                    return (
+                                                                                        <div className="col-6">
+                                                                                            <h5>{item1.subcategoryname}</h5>
+                                                                                            {
+                                                                                                item1.subsubcategories.map((item2) => {
+                                                                                                    return (
+                                                                                                        <div>
+                                                                                                            <h6>{item2.subsubcategoryname}</h6>
+                                                                                                        </div>
+                                                                                                    )
+                                                                                                })
+                                                                                            }
+                                                                                        </div>
+                                                                                    )
+                                                                                }
+                                                                            }
+                                                                        )
+                                                                    }
 
-                                                          {
-                                                              item.subcategories.map((item1) => {
-                                                                  if(item.subcategories.length > 0){return(
-                                                                    <div className="col-6">
-                                                                        <h5>{item1.subcategoryname}</h5>
-                                                                        {
-                                                                            item1.subsubcategories.map((item2) => {
-                                                                                return(
-                                                                                    <div><h6>{item2.subsubcategoryname}</h6></div>
-                                                                                )
-                                                                            })
-                                                                        }
-                                                                    </div>
-                                                                  )}
-                                                                  }
-
-                                                              )
-                                                          }
-
-                                                      </div>
+                                                                </div>
 
 
                                                                 {
                                                                     item.alladvertisements.map((item3) => {
-                                                                        if(item.alladvertisements.length > 0){
-                                                                        return(
-                                                                            <div className="foto">
-                                                                                <div className="foot-in">
-                                                                                <img src={API_PATH + item3.image} alt=""/>
-                                                                            </div>
-                                                                            </div>
-                                                                        )}
+                                                                        if (item.alladvertisements.length > 0) {
+                                                                            return (
+                                                                                <div className="foto">
+                                                                                    <div className="foot-in">
+                                                                                        <img
+                                                                                            src={API_PATH + item3.image}
+                                                                                            alt=""/>
+                                                                                    </div>
+                                                                                </div>
+                                                                            )
+                                                                        }
                                                                     })
                                                                 }
 
+                                                            </div>
                                                         </div>
-                                                    </div>
                                                     </div>
                                                 </div>
                                             )
@@ -192,13 +197,16 @@ const Navbar = (props) => {
                                     </div>
 
 
-
                                 </div>
 
 
+                                <button className="btn-close w3-teal kris  mt-3 me-3" id="toggler1"></button>
 
-                                <div className="btn-close mt-3 me-3" id="toggler1" ></div>
+                                <div className="lor" id="toggler1">
+                                </div>
                             </UncontrolledCollapse>
+
+
 
                         </div>
                         <div className="logo-img">
@@ -207,65 +215,64 @@ const Navbar = (props) => {
                             </Link>
                         </div>
 
-                            <div onClick={togglein} className="allinp d-flex align-items-center">
-                                <h2 className="fas fa-search text-white d-flex align-items-center"></h2>
-                                <Modal isOpen={modalin} toggle={togglein}>
+                        <div onClick={togglein} className="allinp d-flex align-items-center">
+                            <h2 className="fas fa-search text-white d-flex align-items-center"></h2>
+                            <Modal isOpen={modalin} toggle={togglein}>
 
-                                    <ModalBody className="for-inputt">
-                                <div className="for-input">
-                                    {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
-                                    <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
-                                    <Link to={'/filt'}  className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
-                                        <div onClick={togglein}></div>
-                                    </Link>
-                                </div>
-                                    </ModalBody>
-                                </Modal>
-                            </div>
-
+                                <ModalBody className="for-inputt">
+                                    <div className="for-input">
+                                        {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
+                                        <input value={input} onChange={e => inputHandler(e)} type="text"
+                                               placeholder="Я ищу..."/>
+                                        <Link to={'/filt'} className='search fas fa-search'
+                                              onClick={(e) => props.onSubmit(input)}>
+                                            <div onClick={togglein}></div>
+                                        </Link>
+                                    </div>
+                                </ModalBody>
+                            </Modal>
                         </div>
 
-                        <div className="for-input">
-                            {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
-                            <input value={input} onChange={e=>inputHandler(e)} type="text" placeholder="Я ищу..."/>
-                            <Link to={'/filt'} className={'search fas fa-search'} onClick={(e) => props.onSubmit(input)}>
+                    </div>
 
-                            </Link>
-                            {/*<i onClick={e => onSubmit(e)} className={'fas fa-search search'}></i>*/}
+                    <div className="for-input">
+                        {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
+                        <input value={input} onChange={e => inputHandler(e)} type="text" placeholder="Я ищу..."/>
+                        <Link to={'/filt'} className={'search fas fa-search'} onClick={(e) => props.onSubmit(input)}>
 
-
-
-
-                            {/*{inputValue && <div  className="filter"  >*/}
+                        </Link>
+                        {/*<i onClick={e => onSubmit(e)} className={'fas fa-search search'}></i>*/}
 
 
+                        {/*{inputValue && <div  className="filter"  >*/}
 
 
-                            {/*    {*/}
-                            {/*          filteredResults.map((items) => {*/}
-                            {/*            console.log(items)*/}
-                            {/*            return(*/}
+                        {/*    {*/}
+                        {/*          filteredResults.map((items) => {*/}
+                        {/*            console.log(items)*/}
+                        {/*            return(*/}
 
-                            {/*                <div>*/}
-                            {/*                    <h4 onClick={e => onSubmit(e,items)}>{items && items.productname}</h4>*/}
+                        {/*                <div>*/}
+                        {/*                    <h4 onClick={e => onSubmit(e,items)}>{items && items.productname}</h4>*/}
 
-                            {/*                </div>*/}
+                        {/*                </div>*/}
 
-                            {/*            )*/}
-                            {/*        }  )*/}
+                        {/*            )*/}
+                        {/*        }  )*/}
 
-                            {/*    }*/}
-                            {/*</div>}*/}
+                        {/*    }*/}
+                        {/*</div>}*/}
 
-                        </div>
-                        <div className="second-left-side">
-                            {localStorage.getItem("token") ? (
-                                <div className="d-flex">
+                    </div>
+                    <div className="second-left-side">
+                        {localStorage.getItem("token") ? (
+                            <div className="d-flex">
                                 <div className="first-qism">
                                     <a href="#">
                                         <Link to={"/menus"} className="ras2">
-                                            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
-                                            <br />
+                                            <img
+                                                src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png"/>
+                                            <br/>
                                             <a href="#">Ползователь</a>
                                         </Link>
                                     </a>
@@ -273,67 +280,70 @@ const Navbar = (props) => {
                                 </div>
 
 
-                                    <div className="first-qism">
-                                        <a href="#">
-                                            <Link to={"/korzina"} className="ras3">
-                                                <img src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png" />
-                                                <br />
-                                                <a href="#">Корзина</a>
-                                            </Link>
-                                        </a>
-                                    </div>
-
+                                <div className="first-qism">
+                                    <a href="#">
+                                        <Link to={"/korzina"} className="ras3">
+                                            <img
+                                                src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png"/>
+                                            <br/>
+                                            <a href="#">Корзина</a>
+                                        </Link>
+                                    </a>
                                 </div>
 
-                            ) : (
-                                <div className="d-flex">
-                                    {/*<div className="first-qism">*/}
-                                    {/*    <a href="#">*/}
-                                    {/*        <Link to={"/login"} className="ras2">*/}
-                                    {/*            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />*/}
-                                    {/*            <br />*/}
-                                    {/*            <a href="#">Войти</a>*/}
-                                    {/*        </Link>*/}
-                                    {/*    </a>*/}
-                                    {/*</div>*/}
+                            </div>
 
-                                    <div className="first-qism">
-                                        <a href="#">
-                                            <Link to={"/enter"} className="ras2">
-                                                <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />
-                                                <br />
-                                                <a href="#">Ползователь</a>
-                                            </Link>
-                                        </a>
-                                    </div>
+                        ) : (
+                            <div className="d-flex">
+                                {/*<div className="first-qism">*/}
+                                {/*    <a href="#">*/}
+                                {/*        <Link to={"/login"} className="ras2">*/}
+                                {/*            <img src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png" />*/}
+                                {/*            <br />*/}
+                                {/*            <a href="#">Войти</a>*/}
+                                {/*        </Link>*/}
+                                {/*    </a>*/}
+                                {/*</div>*/}
 
-                                    <div className="first-qism">
-                                        <a href="#">
-                                            <Link to={"/korzina"} className="ras3">
-                                                <img src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png" />
-                                                <br />
-                                                <a href="#">Корзина</a>
-                                            </Link>
-                                        </a>
-                                    </div>
+                                <div className="first-qism">
+                                    <a href="#">
+                                        <Link to={"/enter"} className="ras2">
+                                            <img
+                                                src="https://img.icons8.com/external-kiranshastry-solid-kiranshastry/64/ffffff/external-user-interface-kiranshastry-solid-kiranshastry-1.png"/>
+                                            <br/>
+                                            <a href="#">Ползователь</a>
+                                        </Link>
+                                    </a>
                                 </div>
-                            )}
-                        </div>
+
+                                <div className="first-qism">
+                                    <a href="#">
+                                        <Link to={"/korzina"} className="ras3">
+                                            <img
+                                                src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png"/>
+                                            <br/>
+                                            <a href="#">Корзина</a>
+                                        </Link>
+                                    </a>
+                                </div>
+                            </div>
+                        )}
                     </div>
-                    <div className="oval"></div>
                 </div>
+                <div className="oval"></div>
             </div>
-        );
+        </div>
+    );
 
 }
 
 const mapStateToProps = (state) => {
-    return{
-        menus:state.burger.menus,
-        menusId:state.burger.menusId,
-        show:state.burger.show
+    return {
+        menus: state.burger.menus,
+        menusId: state.burger.menusId,
+        show: state.burger.show
     }
 }
 
 
-export default connect(mapStateToProps,{setBurger,getBurger,getBurgerId,onSubmit})(Navbar);
+export default connect(mapStateToProps, {setBurger, getBurger, getBurgerId, onSubmit})(Navbar);
