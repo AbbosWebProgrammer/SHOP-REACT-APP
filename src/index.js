@@ -17,9 +17,6 @@ import 'react-toastify/dist/ReactToastify.css';
 import thunk from "redux-thunk";
 
 import MainRoot from "./Components/MainRoot";
-import MainParts from "./Components/HomePage/MainParts";
-
-import AppF from "./Components/Filters";
 
 import './sass/main.scss'
 

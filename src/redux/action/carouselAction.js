@@ -20,13 +20,11 @@ export const getCarousel = () => (dispatch,getState) => {
 
 
 export const getCarouselId = (id, history) => {
-    // console.log(id)
-    // console.log("id,history")
     return function (dispatch,getState) {
         axios.get(API_PATH + "api/ShoppingDayForHomePageCarouselProducts/" + id)
             .then((res) => {
                 dispatch(slides({slideId:res.data}))
-                history.push("/twooo")
+                 // history.push("/carousel/:id}")
             })
     }
 }

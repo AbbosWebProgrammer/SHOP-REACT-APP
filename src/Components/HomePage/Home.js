@@ -24,6 +24,7 @@ import {API_PATH} from "../../tools/constans";
 const Home = (props) => {
 
     useEffect(() => {
+        props.getPartsIdss(window.location.pathname.split('/')[2])
         props.getPartsB();
     },[])
 
@@ -42,14 +43,15 @@ const Home = (props) => {
                     <h1>Хиты продаж</h1>
                     <CardsMain/>
 
-                    <div className="row">
+                    <div className="row medpart">
 
                         {
                             props.partsB.splice(0,2).map((datas,index) => (
                                 <div className="parts  col-6 mt-4" key={index}>
-                                <div className="half" >
+                                < div className="half" >
+                                    <Link to={"/parts2/"+`${datas.id}`}>
                                     <img onClick = {() => props.getPartsIdss(datas.brand, props.history)} src={datas.image} alt=""/>
-
+                                    </Link>
                                 </div>
                                 </div>
                             ))
@@ -65,7 +67,7 @@ const Home = (props) => {
                             props.partsB.map((datasi,index) => (
                                 <div className="parts  col-6 mt-4" key={index}>
                                     <div className="half" >
-                                        <img onClick = {() => props.getPartsIdss(datasi.brand, props.history)} src={datasi.image} alt=""/>
+                                        <img onClick = {() => props.getPartsIdss(datasi.brand, props.history)}  src={datasi.image} alt=""/>
 
                                     </div>
                                 </div>

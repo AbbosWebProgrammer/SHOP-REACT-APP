@@ -25,9 +25,9 @@ const CarouselMain = (props) => {
     //     .then(res => setData(res.data))
 
    const renderSlides = props.slide.map( (data, index) => (
-        <div key={index}>
-            <img src={data.image} onClick={() => props.getCarouselId(data.id, props.history)} alt=""/>
-        </div>
+        <Link to={"/carousel/"+`${data.id}`} key={index} onClick={() => props.getCarouselId(data.id, props.history)}>
+            <img  src={data.image}  alt=""/>
+        </Link>
     ))
 
     return (

@@ -57,14 +57,4 @@ export const getParts = () =>  (dispatch,getState) => {
 }
 
 
-export const getPartsId = (id, history) => {
 
-    return function(dispatch, getState) {
-        axios.get(API_PATH +"api/MainPagePromoForHomePageProducts/" + id )
-
-            .then((res) => {
-                dispatch(inform({partscard:res.data}))
-                history.push("/two")
-            })
-    }
-}

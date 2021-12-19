@@ -15,7 +15,7 @@ import {getCarouselId} from "../redux/action/carouselAction";
 const Main2 = (props) => {
 
     useEffect(() => {
-        props.getCarouselId();
+        props.getCarouselId(window.location.pathname.split('/')[2]);
     },[])
 
 

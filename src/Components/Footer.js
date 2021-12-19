@@ -1,7 +1,7 @@
 import React, {Component} from 'react';
 import {App} from "./FooterResponse";
 import {Link} from "react-router-dom";
-
+import logo from "./img/logotip.png";
 class Footer extends Component {
 
     constructor(props) {
@@ -19,14 +19,14 @@ class Footer extends Component {
                         <div className="link-one w-25">
                             <ul>
                                 <li>
-                                    <img className='w-50' src="images/logotip.png" alt=""/>
+                                    <img className='w-50' src={logo} alt=""/>
 
                                 </li>
                                 <li>
                                     <h2>Телефон поддержки</h2>
                                 </li>
                                 <li>
-                                    <h2>+998(99) 077 08 49</h2>
+                                    <h2>+998(55) 500 02 05</h2>
                                 </li>
 
                             </ul>

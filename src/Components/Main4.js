@@ -6,45 +6,44 @@ import Back from "./Back";
 import Footer from "./Footer";
 import Cards from "./Cards";
 import {API_PATH} from "../tools/constans";
-
+import {getPartsIdss , inform} from "../redux/action/mainPartsAction";
 import {connect} from "react-redux";
-import FilterCards from "./FilterCards";
+import Cards4 from "./Cards4";
 import Nav from "./Nav";
 
 
-const MainFilter = (props) => {
+const Main4 = (props) => {
 
-
+    useEffect(() => {
+        props.getPartsIdss();
+    },[])
 
 
     return (
-
         <div>
-
             <Nav/>
-
         <div className="row main me-0">
 
 
             <div className="col-lg-12 col-md-12">
                 <div className="man">
 
-                    <FilterCards/>
+                    <Cards4/>
+
+
 
                 </div>
             </div>
         </div>
-
             <Footer/>
-
         </div>
     );
 }
 
 const mapStateToProps = (state) => {
-    return {
+    return{
         partsId: state.partM.partsId,
     }
 }
 
-export default connect(mapStateToProps, null)(MainFilter);
+export default connect(mapStateToProps,{getPartsIdss,inform}) (Main4);

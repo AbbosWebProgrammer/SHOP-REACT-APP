@@ -54,7 +54,7 @@ const AdminMenus = (props) => {
                             <h1 className="name">Ползователь</h1>
                         </div>
                         <div className="card-content">
-                            <p className="phone">Телефон:</p>
+                            <p className="phone">Телефон: {props.phone}</p>
                             <p className="email">Email:</p>
                         </div>
                     </div>
@@ -132,7 +132,8 @@ const mapStateToProps = (state) => {
     return{
         open:state.menus.open,
         url:state.menus.url,
-        submenu: state.menus.submenu
+        submenu: state.menus.submenu,
+        phone:state.cardsR.phone
     }
 };
 

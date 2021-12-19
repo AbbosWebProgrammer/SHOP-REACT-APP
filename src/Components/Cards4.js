@@ -2,36 +2,33 @@ import React, {Component, useEffect} from 'react';
 import ModalExample from "./Data";
 import {Link} from "react-router-dom";
 import {connect} from "react-redux";
-import {setBurger,onSubmit} from "../redux/action/burgerAction";
+import {inform,getPartsIdss,getParts,getCardBack} from "../redux/action/mainPartsAction";
 import {API_PATH} from "../tools/constans";
 import Back from "./Back";
 
 
-const FilterCards = (props) => {
+const Cards4 = (props) => {
 
     useEffect(() => {
-        props.onSubmit(window.location.pathname.split('/')[2])
-    }, [])
-
-
-    // setTimeout(() => {
-    //     console.log('---------------------------------' ,props.filter)
-    // }, 3000)
+        props.getParts();
+        props.getPartsIdss();
+    },[])
 
     return (
 
         <div
             className="row cards mt-5">
 
-            {props.filter.data && props.filter.data.map((data, index) => (
-                <div className="text-decoration-none twocards col-lg-2 col-md-3 col-sm-6 col-xs-6 mb-5 ">
+            {props.partscardss.data &&  props.partscardss.data.map((data, index) => (
+                // col-lg-3 col-md-3 col-sm-6 col-xs-6
+                <div className="text-decoration-none twocards col-lg-2 col-md-3 col-sm-4 col-xs-6 mb-5 ">
                     <div  className='kategoriya'>
 
                         <div>
                             <div className="prosmotr">
                                 <ModalExample id={data.id}/>
                             </div>
-                            <Link  to={"/product/"+`${data.id}`} onClick={() => props.getCardBack(data.id , props.history) } className="out">
+                            <Link to={"/product/"+`${data.id}`}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
 
 
                                 <div className="foot">
@@ -81,10 +78,22 @@ const FilterCards = (props) => {
 const mapStateToProps = (state) => {
 
 
-    return {
-        filter:state.burger.filter
+    return{
+        parts:state.partM.parts,
+        partscardss: state.partM.partscardss
     }
 }
 
 
-export default connect(mapStateToProps, {setBurger,onSubmit})(FilterCards);
+export default connect(mapStateToProps,{inform,getPartsIdss,getParts,getCardBack})(Cards4);
+
+
+
+
+
+
+
+
+
+
+

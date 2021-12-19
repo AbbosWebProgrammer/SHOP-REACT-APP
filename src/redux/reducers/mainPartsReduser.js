@@ -4,6 +4,7 @@ import {SET_PARTS} from "../types/menusTypes";
 const initialState = {
     parts:[],
     partscard:[],
+    partscardss:[],
     partsB:[],
     partscardB:[],
     back:[],

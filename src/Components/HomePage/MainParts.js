@@ -16,8 +16,9 @@ const MainParts = (props) => {
 
             <div className="parts  col-sm-3  mt-4" key={index}>
                 <div className="box-img" >
+                    <Link to={"/parts2/"+`${datas.id}`}>
                     <img onClick = {() => props.getPartsId(datas.id, props.history)} src={datas.image} alt=""/>
-
+                    </Link>
                 </div>
             </div>
 

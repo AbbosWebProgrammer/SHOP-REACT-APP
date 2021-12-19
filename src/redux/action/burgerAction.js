@@ -26,7 +26,7 @@ export const getBurgerId = (id, history) => {
     return function (dispatch , getState) {
         axios.get(API_PATH + "api/ProductsByCategoryId/" + id)
             .then((res) => {
-                console.log(res.data)
+
                 dispatch(setBurger({menusId:res.data}));
                     // history.push("/categorypage")
 
@@ -39,8 +39,8 @@ export const getBurgerId = (id, history) => {
 
 
 export const onSubmit =  (input) =>  {
-    return async function  (dispatch,getState) {
-        await axios.get(API_PATH + 'api/SearchProducts/' + input)
+    return  function (dispatch,getState) {
+         axios.get(API_PATH + 'api/SearchProducts/' + input)
             .then((res) => {
             dispatch(setBurger({filter: res.data}))
         })

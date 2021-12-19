@@ -16,6 +16,7 @@ const Korzina = () => {
         phone: "",
         address: "",
     });
+    const [productss, setproducts] = useState([]);
 
     const onChange = (e) => {
         setForm({
@@ -24,28 +25,47 @@ const Korzina = () => {
         });
     };
 
+
     const onSubmit = async (e) => {
         e.preventDefault();
+        let k=JSON.parse(localStorage.getItem("basket"));
+        let products=[]
+        k.map((item) => (
+            products.push({
+                id:Date.now(),
+                productid: item.id,
+                productcolorid: item.currentColorid,
+                productsizeid: item.sizeid,
+                buy_quantity: item.buy_quantity
+            }) ))
 
-        const data = {
-            ...form,
-            data: JSON.parse(localStorage.getItem("basket")),
-        };
-
-        try {
-            const res = await axios.post(
-                API_PATH + "api/OrderJson/",
-                { data },
-                { headers: { "Content-Type": "application/json" } }
-            );
-            console.log(res);
-            toast("Ваши закупки отправлены")
-        } catch (err) {
-            console.log(err);
+        let data={
+            user:form,
+            products:products
         }
+        console.log(data)
+    
+            axios.post(API_PATH+'api/OrderJson/', {"data":data}, {Headers:{ 'Content-Type': 'application/json' }})
+            .then((res) => {
+                            if(res.data.status="OK"){
+                                console.log(res);
+                                localStorage.setItem("basket", JSON.stringify([]))
+                                form.name=''
+                                form.surname=''
+                                form.phone=''
+                                form.address=''
+                                setBool(!bool);
+                                toast("Ваш заказ оформлен!") 
 
-        // console.log(data);
+                            }
+                            else{
+                                toast("Ваш заказ неоформлен!")
+                            }
+                        })
+
+
     };
+
 
     const inc = (e, order, q) => {
         let quantity = q;
@@ -60,6 +80,7 @@ const Korzina = () => {
         });
 
         localStorage.setItem("basket", JSON.stringify(filtered));
+        
     };
     const dec = (e, order, q) => {
         let quantity = q;
@@ -121,7 +142,7 @@ const Korzina = () => {
 
     return (
         <React.Fragment>
-            <Navbar />
+            <Navbar number={orders} />
             <div className="main-cart">
                 <div className="left-side">
                     <div className="basket">
@@ -139,14 +160,15 @@ const Korzina = () => {
                                 <div className="orders-list-item">
                                     <div className="d-flex w-50">
                                         <div className="order-image">
-                                            <img src={API_PATH + order.colors[0].image[0].image} />
+                                            <img src={API_PATH.substring(0, API_PATH.length - 1) + order.currentColorimage} />
+
                                         </div>
                                         <div className="order-content">
                                             <span>{order.productname}</span>
-                                            <span> {order.currentColor.color ? `Цветь: ${order.currentColor.color}` : ""}</span>
+                                            <span> {order.currentColor ? `Цветь:  ${order.currentColor}` : ""}</span>
                                             <span>
-                          Размер: {order.size && order.size.ordersize}
-                        </span>
+                                            {order.size && order.size.ordersize ? `Размер:  ${order.size.ordersize}` : ""}
+                                            </span>
                                             <span>Бренд: {order.brand}</span>
                                         </div>
                                     </div>
@@ -274,13 +296,17 @@ const Korzina = () => {
                   Выбрать адрес доставки
                 </a>
               </span>
-                        </div>
+                        </div>{
+                            form.name!=="" && form.phone!=="" && localStorage.getItem("basket") && JSON.parse(localStorage.getItem("basket"))&&(JSON.parse(localStorage.getItem("basket"))).length!==0&&form.name!==""&&form.address!==""?
+                            <button onClick={(e) => onSubmit(e)} className="button"> ЗАКАЗАТЬ </button>
+                            :
+                            <button className="button opacity-50" disabled>  ЗАКАЗАТЬ   </button>
+                        }
 
-                        <button onClick={(e) => onSubmit(e)} className="button">
-                            ЗАКАЗАТЬ
-                        </button>
+                        
                     </div>
                 </div>
+            
             </div>
             <Footer />
         </React.Fragment>

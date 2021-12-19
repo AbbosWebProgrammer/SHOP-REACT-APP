@@ -28,7 +28,7 @@ export const getPartsId = (id, history) => {
 
            .then((res) => {
                dispatch(inform({partscard:res.data}))
-               history.push("/two")
+               // history.push("/parts/:id")
            })
    }
 }
@@ -54,13 +54,13 @@ export const getPartsB = () =>  (dispatch,getState) => {
 }
 
 export const getPartsIdss = (id, history) => {
-    console.log('brand', id)
+
     return function(dispatch, getState) {
         axios.get(API_PATH +"api/MainPagePromoForHomePageSliderProducts/" + id )
 
             .then((res) => {
-                dispatch(inform({partscard:res.data}))
-                history.push("/two")
+                dispatch(inform({partscardss:res.data}))
+                // history.push("/parts2/:id")
             })
     }
 }

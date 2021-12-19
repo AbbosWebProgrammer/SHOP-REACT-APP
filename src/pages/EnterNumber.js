@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import { AvForm, AvField } from "availity-reactstrap-validation";
 import { connect } from "react-redux";
-import { enternumber } from "../redux/action/loginAction";
+import { enternumber,polzovatel } from "../redux/action/loginAction";
 import Navbar from "../Components/Nav";
 import axios from "axios";
 import Footer from "../Components/Footer";
@@ -89,6 +89,7 @@ const EnterNumber = (props) => {
         }
     };
 
+
     return (
         <div>
             <Navbar />
@@ -96,8 +97,8 @@ const EnterNumber = (props) => {
             <div className="container mt-5">
                 <div className="row  justify-content-center align-items-center mt-5">
                     <div className="col-lg-4 col-sm-8 col-md-6 mt-5">
-                        <div className="card">
-                            <div className="card-body">
+                        <div className="card form-card">
+                            <div className="card-body ">
                                 <form className="form-data p-2">
                                     <div className="form-field flex">
                                         <input
@@ -114,7 +115,7 @@ const EnterNumber = (props) => {
                                         />
                                         <button
                                             htmlFor="email"
-                                            className={`btn btn-danger ms-1 ${
+                                            className={`btn  ms-1 ${
                                                 smsVerify ? "d-none" : ""
                                             }`}
                                             onClick={(e) => postPhone(e)}
@@ -137,7 +138,7 @@ const EnterNumber = (props) => {
                                         <button
                                             onClick={(e) => verifyPhone(e)}
                                             htmlFor="email"
-                                            className="btn btn-danger ms-1"
+                                            className=" btn ms-1"
                                         >
                                             Подтвердить
                                         </button>
@@ -173,7 +174,7 @@ const EnterNumber = (props) => {
                 </div>
                 <div className="row mt-5 mb-5">
                     <Link to="/login">
-                    <button className="bg-danger btn text-white col-4 offset-4 mb-5 ">Войти</button>
+                    <button className="but btn text-white col-4 offset-4 mb-5 ">Войти</button>
                     </Link>
                 </div>
 
@@ -184,4 +185,16 @@ const EnterNumber = (props) => {
     );
 };
 
-export default connect(null, { enternumber })(EnterNumber);
+
+const mapStateToProps = (state) => {
+    // console.log(state)
+    return {
+        cards: state.cardsR.cards,
+        getCardsId: state.cardsR.getCardsId,
+        user:state.cardsR.user,
+        phone:state.cardsR.phone
+
+    }
+};
+
+export default connect(mapStateToProps, { enternumber,polzovatel })(EnterNumber);

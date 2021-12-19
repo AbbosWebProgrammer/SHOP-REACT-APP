@@ -46,5 +46,11 @@ export function enternumber(event, errors, values, history) {
 }
 
 
+export function polzovatel() {
+    return function () {
+
+    }
+};
+
 
 

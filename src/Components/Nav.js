@@ -12,11 +12,17 @@ import {Input} from "semantic-ui-react";
 import FilterCards from "./FilterCards";
 import data from "bootstrap/js/src/dom/data";
 import ModalBody from "reactstrap/es/ModalBody";
+import logo from "./img/logotip.png";
+import langru from "./img/img-bayroq-rus.svg";
+import Burg from "./img/burg.png";
+
+
 
 const Navbar = (props) => {
 
     useEffect(() => {
         props.getBurger();
+        props.onSubmit(window.location.pathname.split('/')[2]);
 
     }, [])
 
@@ -67,12 +73,14 @@ const Navbar = (props) => {
     const [modalin, setModalin] = useState(false);
     const togglein = () => setModalin(!modalin);
 
-
     const [input, setInput] = useState('')
 
     const inputHandler = e => {
         setInput(e.target.value)
     }
+
+
+
     // {Headers:'Content-Type':'applicatio' + 'n/json'}
     return (
         <div className="nav-box">
@@ -81,11 +89,10 @@ const Navbar = (props) => {
             <div className="navbar">
 
                 <div className="first-div d-flex justify-content-between w-100 ">
-
                     <ul>
                         <li>
                             <a href='#'>Ru</a>
-                            <img className='ms-1' src="images/img-bayroq-rus.svg" alt=""/>
+                            <img className='ms-1' src={langru} alt=""/>
                         </li>
 
                         <li>
@@ -118,12 +125,12 @@ const Navbar = (props) => {
                     <div className="all">
                         <div className="for-img-one">
                             <a href="#" id="toggler1">
-                                <img src="images/burg.png" alt=""/>
+                                <img src={Burg} alt=""/>
                             </a>
 
                             <UncontrolledCollapse className="left" toggler="#toggler1">
                                 <div className="kategory">
-                                    <div>
+                                    <div className="scrol">
 
                                         {props.menus.map((item, index) => {
                                             // name-table d-flex
@@ -131,7 +138,7 @@ const Navbar = (props) => {
                                                 <div key={index} className='name mt-4'>
                                                     {/*{`name-tabler d-flex ${props.show? "show" : ""}`} onMouseEnter={() => props.setBurger({show: ! props.show})}*/}
                                                     <div className="name-tabler">
-                                                        <Link to={"/categorypage"}
+                                                        <Link to={"/category/"+`${item.id}`}
                                                               onClick={() => props.getBurgerId(item.id, props.history)}
                                                               className="name-table d-flex">
 
@@ -146,10 +153,10 @@ const Navbar = (props) => {
                                                                 <div className="row">
 
                                                                     {
-                                                                        item.subcategories.map((item1) => {
+                                                                        item.subcategories.map((item1,indexi) => {
                                                                                 if (item.subcategories.length > 0) {
                                                                                     return (
-                                                                                        <div className="col-6">
+                                                                                        <div key={indexi} className="col-6">
                                                                                             <h5>{item1.subcategoryname}</h5>
                                                                                             {
                                                                                                 item1.subsubcategories.map((item2) => {
@@ -171,10 +178,10 @@ const Navbar = (props) => {
 
 
                                                                 {
-                                                                    item.alladvertisements.map((item3) => {
+                                                                    item.alladvertisements.map((item3,indexx) => {
                                                                         if (item.alladvertisements.length > 0) {
                                                                             return (
-                                                                                <div className="foto">
+                                                                                <div key={indexx} className="foto">
                                                                                     <div className="foot-in">
                                                                                         <img
                                                                                             src={API_PATH + item3.image}
@@ -194,13 +201,14 @@ const Navbar = (props) => {
                                         })
 
                                         }
+
                                     </div>
 
 
                                 </div>
 
 
-                                <button className="btn-close w3-teal kris  mt-3 me-3" id="toggler1"></button>
+                                <button className="btn-close w3-teal kris  mt-3 me-3 jus" id="toggler1"></button>
 
                                 <div className="lor" id="toggler1">
                                 </div>
@@ -211,7 +219,7 @@ const Navbar = (props) => {
                         </div>
                         <div className="logo-img">
                             <Link to={"/"}>
-                                <img src="images/logotip.png" alt=""/>
+                                <img src={logo} alt=""/>
                             </Link>
                         </div>
 
@@ -221,11 +229,10 @@ const Navbar = (props) => {
 
                                 <ModalBody className="for-inputt">
                                     <div className="for-input">
-                                        {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
+
                                         <input value={input} onChange={e => inputHandler(e)} type="text"
                                                placeholder="Я ищу..."/>
-                                        <Link to={'/filt'} className='search fas fa-search'
-                                              onClick={(e) => props.onSubmit(input)}>
+                                        <Link to={"/filter/"+(input)} className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
                                             <div onClick={togglein}></div>
                                         </Link>
                                     </div>
@@ -238,7 +245,7 @@ const Navbar = (props) => {
                     <div className="for-input">
                         {/*<input value={input} onChange={e=>inputHandler(e)} type="text"/>*/}
                         <input value={input} onChange={e => inputHandler(e)} type="text" placeholder="Я ищу..."/>
-                        <Link to={'/filt'} className={'search fas fa-search'} onClick={(e) => props.onSubmit(input)}>
+                        <Link to={"/filter/"+(input)}  className='search fas fa-search' onClick={(e) => props.onSubmit(input)}>
 
                         </Link>
                         {/*<i onClick={e => onSubmit(e)} className={'fas fa-search search'}></i>*/}
@@ -282,7 +289,9 @@ const Navbar = (props) => {
 
                                 <div className="first-qism">
                                     <a href="#">
-                                        <Link to={"/korzina"} className="ras3">
+                                        <Link to={"/korzina"} className="ras3 position-relative">
+
+
                                             <img
                                                 src="https://img.icons8.com/ios-filled/50/ffffff/click-and-collect.png"/>
                                             <br/>

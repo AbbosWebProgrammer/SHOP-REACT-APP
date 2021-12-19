@@ -14,7 +14,7 @@ const Cards3 = (props) => {
 
     useEffect(() => {
         props.getBurger();
-        props.getBurgerId();
+        props.getBurgerId(window.location.pathname.split('/')[2]);
     },[])
 
     return (
@@ -30,7 +30,7 @@ const Cards3 = (props) => {
                             <div className="prosmotr">
                                 <ModalExample id={data.id}/>
                             </div>
-                            <Link to={"/three"}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
+                            <Link to={"/product/"+`${data.id}`}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
 
                                 <div className="foot">
                                     <div className="example"></div>
@@ -46,6 +46,7 @@ const Cards3 = (props) => {
                                     <span className='pink'>{data.colors[0].discount} % </span>
                                 </div>
                                 <div>
+
                                     <h4 className='size'>{data.colors[0].price} sum
                                         <span className='old'>{data.colors[0].oldprice} sum</span>
                                         {/*<span className='pink'>{item.small}</span>*/}

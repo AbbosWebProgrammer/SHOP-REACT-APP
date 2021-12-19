@@ -42,10 +42,10 @@ const CardsMain = (props) => {
                                         <Back props={data.id}/>
                                     </div>
 
-                                    <Link to={"/three"} onClick={() => props.getCardBack(data.id , props.history) } className="out text-decoration-none">
+                                    <Link to={"/product/"+`${data.id}`} onClick={() => props.getCardBack(data.id , props.history) } className="out text-decoration-none">
 
                                         <div>
-                                            <div className="position-relative mb-2">
+                                            <div className="mb-2 nem">
 
                                                 <img className='w-100' src={API_PATH + data.colors[0].image[0].image} alt=""/>
                                                 <span className='pink'>{data.colors[0].discount} % </span>

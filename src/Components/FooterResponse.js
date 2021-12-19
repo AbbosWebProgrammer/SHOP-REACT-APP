@@ -1,5 +1,5 @@
 import React from "react";
-
+import logo from "./img/logotip.png";
 const Accordion = ({ title, children }) => {
     const [isOpen, setOpen] = React.useState(false);
     return (
@@ -22,13 +22,13 @@ export const App = () => (
         <Accordion title="Телефон ">
             <ul>
 
-                    <img className='w-50 mt-2 mb-2' src="images/logotip.png" alt=""/>
+                    <img className='w-50 mt-2 mb-2' src={logo} alt=""/>
 
                 <li>
                     <h2>Телефон поддержки</h2>
                 </li>
                 <li>
-                    <h2>+998(99) 077 08 49</h2>
+                    <h2>+998(55) 500 02 05</h2>
                 </li>
 
             </ul>

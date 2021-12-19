@@ -8,7 +8,7 @@ import EnterNumber from "../pages/EnterNumber";
 import AdminMenus from "../pages/dashboard/AdminMenus";
 
 
-import {BrowserRouter,Switch,Route} from "react-router-dom"
+import {BrowserRouter, Switch, Route, Link} from "react-router-dom"
 import Wildberrries from "./Wildberries"
 import Back from "./Back";
 import Korzina from "./HomePage/Korzina";
@@ -21,6 +21,9 @@ import Register from "../pages/Register";
 import MainFilter from "./MainFilter";
 import Verify from "../pages/Verify";
 import FilterCards from "./FilterCards";
+import Main4 from "./Main4";
+import Cards4 from "./Cards4";
+
 
 class MainRoot extends Component {
 
@@ -28,18 +31,22 @@ class MainRoot extends Component {
 
         return (
             <div>
+
                 <BrowserRouter>
                     <Switch>
+
                         <Route path="/" exact component={Home} />
-                        <Route path="/two" exact component={Wildberries} />
-                        <Route path="/twooo" exact component={Main2}/>
-                        <Route path="/four" exact component={Main3}/>
-                        <Route path="/categorypage" exact component={MainBurger}/>
-                        <Route path="/filterpage" exact component={MainFilter}/>
-                        <Route path="/three" exact component={Back} />
+                        <Route path={"/parts/:id"} exact component={Wildberries} />
+                        <Route path={"/carousel/:id"}  exact component={Main2}/>
+                        <Route path={"/brands/:id"} exact component={Main3}/>
+                        <Route path={"/parts2/:id"}  exact component={Main4}/>
+                        <Route path={"/category/:id"} exact component={MainBurger}/>
+                        <Route path={"/product/:id"}exact component={Back} />
                         <Route path={"/cards/:id"} exact component={Cards}/>
                         <Route path={"/cards2/:id2"} exact component={Cards2}/>
-                        <Route path={"/filt"} exact component={MainFilter}/>
+                        <Route path={"/cards4/:id2"} exact component={Cards4}/>
+                        <Route path={"/filtercards/:input"} exact component={FilterCards}/>
+                        <Route path={"/filter/:input"} exact component={MainFilter}/>
 
                         <Route path={"/message"} exact component={Verify}/>
 
@@ -52,12 +59,13 @@ class MainRoot extends Component {
                         <Route path="/menus" exact component={AdminMenus} />
 
 
+
                     </Switch>
 
 
                     <ToastContainer/>
-
                 </BrowserRouter>
+
             </div>
         );
     }

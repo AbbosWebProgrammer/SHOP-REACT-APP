@@ -15,7 +15,7 @@ const CardBurger = (props) => {
 
 // console.log('kere',props)
     useEffect(() => {
-        props.getBurgerId();
+        props.getBurgerId(window.location.pathname.split('/')[2]);
     },[])
 
 
@@ -35,7 +35,7 @@ const CardBurger = (props) => {
                                     <div className="prosmotr">
                                         <ModalExample id={data.id}/>
                                     </div>
-                                    <Link to={"/three"}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
+                                    <Link to={"/product/"+`${data.id}`}  onClick={() => props.getCardBack(data.id , props.history) } className="out">
 
 
                                         <div className="foot">
@@ -67,6 +67,8 @@ const CardBurger = (props) => {
                                             {/*<div className="zed">gfd</div>*/}
                                         </div>
                                     </div>
+
+
 
                                 </div>
                             </div>

@@ -13,7 +13,7 @@ const Cards2 = (props) => {
 
     useEffect(() => {
         props.getCarousel();
-        props.getCarouselId();
+        props.getCarouselId(window.location.pathname.split('/')[2]);
     },[])
 
     return (
@@ -32,7 +32,7 @@ const Cards2 = (props) => {
                                     <div className="prosmotr">
                                         <ModalExample id={data.id}/>
                                     </div>
-                                    <Link to={"/three"}  onClick={() => props.getCardBack(data.id , props.history) }  className="out">
+                                    <Link to={"/product/"+`${data.id}`}  onClick={() => props.getCardBack(data.id , props.history) }  className="out">
 
 
                                         <div className="foot">
@@ -49,6 +49,7 @@ const Cards2 = (props) => {
                                             <span className='pink'>{data.colors[0].discount} % </span>
                                         </div>
                                         <div>
+
                                             <h4 className='size'>{data.colors[0].price} sum
                                                 <span className='old'>{data.colors[0].oldprice} sum</span>
 

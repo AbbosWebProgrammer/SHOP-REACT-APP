@@ -9,7 +9,7 @@ import {Link} from "react-router-dom";
 const Brends = (props) => {
 
     useEffect(() => {
-        props.getBrand();
+        props.getBrand(window.location.pathname.split('/')[2]);
     },[])
 
         return (
@@ -25,11 +25,11 @@ const Brends = (props) => {
                     {
                         props.images.map((data,index) => (
                             // col-lg-1 col-md-1 col-sm-2
-                        <div onClick={() => props.getBrandId(data.id,props.history)} className='brand col-lg-1 col-md-1 col-sm-2 mt-4' key={index}>
+                        <Link to={"/brands/"+`${data.id}`} onClick={() => props.getBrandId(data.id,props.history)} className='brand col-lg-1 col-md-1 col-sm-2 mt-4' key={index}>
 
                             <img className="w-100" key={data.id} src={data.image} alt=""/>
 
-                        </div>
+                        </Link>
                     ))
                     }
 
